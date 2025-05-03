@@ -4,17 +4,25 @@
         if(file_exists($path))
             include_once($path);
     });
-
-    $router = new core\Router($_GET['route']);
+    if(isset($_GET['route']))
+    {
+        $route = $_GET['route'];
+    }
+    else
+    {
+        $route = '';
+    }
+    $router = new core\Router($route);
+    $router->run();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>lost_island</title>
 </head>
 <body>
-    penis
+    new penis
 </body>
 </html>
