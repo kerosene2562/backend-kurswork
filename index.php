@@ -13,7 +13,7 @@
         $route = '';
     }
 
-    $router = new core\Router($route);
-    $router->run();
-    $router->done();
+    $core = new core\Core($route);
+    $core->run();
+    $core->done();
 ?>

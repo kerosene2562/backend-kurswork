@@ -9,7 +9,6 @@
         public function __construct($route)
         {
             $this->route = $route;
-            $this->indexTemplate = new \core\Template('views/layouts/index.php');
         }
 
         public function run()
@@ -33,8 +32,7 @@
                 if(method_exists($controllerObject, $method))
                 {
                     array_splice($parts, 0, 2);
-                    $params = $controllerObject->$method($parts);
-                    $this->indexTemplate->setParams($params);
+                    return $controllerObject->$method($parts);
                 }
                 else
                 {
