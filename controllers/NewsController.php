@@ -5,11 +5,26 @@
     {
         public function actionAdd()
         {
-            echo "News -> Add";
+            $template = new \core\Template('views/news/add.php');
+            return [
+                'Content' => $template->getHTML(),
+                'Title' => 'додавання новини'
+            ];
         }
 
         public function actionIndex()
         {
-            echo "News -> Index";
+            return [
+                'Content' => 'Index action',
+                'Title' => 'список новин'
+            ];
+        }
+
+        public function actionView($params)
+        {
+            return [
+                'Content' => 'news View',
+                'Title' => 'перегляд новин'
+            ];
         }
     } 

@@ -5,11 +5,19 @@
     {
         public function actionAdd()
         {
-            echo "Site -> Add";
+            $template = new \core\Template('views/site/add.php');
+            return [
+                'Content' => $template->getHTML(),
+                'Title' => 'додавання сторінки'
+            ];
         }
 
         public function actionIndex()
         {
-            echo "Site -> Index";
+            $template = new \core\Template('views/site/index.php');
+            return [
+                'Content' => $template->getHTML(),
+                'Title' => 'головна сторінка'
+            ];
         }
     } 

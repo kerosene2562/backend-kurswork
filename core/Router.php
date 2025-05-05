@@ -4,10 +4,12 @@
     class Router
     {
         protected $route;
-
+        protected $indexTemplate;
+        
         public function __construct($route)
         {
             $this->route = $route;
+            $this->indexTemplate = new \core\Template('views/layouts/index.php');
         }
 
         public function run()
@@ -17,7 +19,7 @@
             if(strlen($parts[0]) == 0)
             {
                 $parts[0] = 'site';
-                $parts[1] = 'index';
+                $parts[1] = 'index'; 
             }
             if(count($parts) == 1)
             {
@@ -30,7 +32,9 @@
                 $controllerObject = new $controller();
                 if(method_exists($controllerObject, $method))
                 {
-                    $controllerObject->$method();
+                    array_splice($parts, 0, 2);
+                    $params = $controllerObject->$method($parts);
+                    $this->indexTemplate->setParams($params);
                 }
                 else
                 {
@@ -41,6 +45,11 @@
             {
                 $this->error(404);
             }
+        }
+
+        public function done()
+        {
+            $this->indexTemplate->display();
         }
 
         public function error($code)
