@@ -13,9 +13,9 @@
 
         public function actionIndex()
         {
-            $db = \core\Core::get()->db;
+            //$db = \core\Core::get()->db;
 
-            $res=\models\Threads::findByCondition(['thread_id' => '4']);
+            //$res=\models\Threads::findByCondition(['thread_id' => '4']);
 
             // $thread = new \models\Threads();
             // $thread->title = "!!!!!!!!";
@@ -43,7 +43,14 @@
             //     'thread_id' => '2'
             // ]);
 
-            return $this->render();
+            // \core\Core::get()->session->set('user_id', 1);
+            // $id = \core\Core::get()->session->get('user_id');
+
+            $row = \models\Admins::findById(1);
+            var_dump($row);
+            die;
+            
+            return $this->render('views/news/view.php');
         }
 
         public function actionView($params)

@@ -9,7 +9,10 @@
         public $router;
         public $template;
         public $db;
+        public $session;
+
         private static $instance;
+        
 
         private function __construct()
         {
@@ -19,13 +22,16 @@
             $login = \core\Config::get()->dbLogin;
             $password = \core\Config::get()->dbPassword;
             $this->db = new \core\DB($host, $name, $login, $password);
+            $this->session = new Session();
+            session_start();
         }
 
         public function run($route)
         {
             $this->router = new \core\Router($route);
             $params = $this->router->run();
-            $this->template->setParams($params);
+            if(!empty($params))
+                $this->template->setParams($params);
         }
 
         public function done()

@@ -4,7 +4,7 @@
     class Model
     {
         protected $fieldsArray;
-        protected static $primaryKey = 'thread_id';
+        protected static $primaryKey = 'id';
         protected static $tableName = '';
 
         public function __construct()

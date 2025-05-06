@@ -107,13 +107,12 @@
             {
                 $where_string = "WHERE ";
                 $where_fields = array_keys($where);
-                //$where_values = array_values($where);
                 $parts = [];
                 foreach($where_fields as $field)
                 {
-                    $parts[] = "{$field} = :{$field}";
-                    $where_string .= implode(' AND ', $parts); 
+                    $parts[] = "{$field} = :{$field}";  
                 }
+                $where_string .= implode(' AND ', $parts);
             }
             else
             {
