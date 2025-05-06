@@ -1,5 +1,5 @@
 <?php
-
+    $this->Title = 'головна сторінка';
 ?>
 <h1>main page</h1>
 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, distinctio? Nobis, nisi? Voluptatem dolorem optio voluptas debitis laudantium animi! Suscipit temporibus, doloremque eligendi ducimus ipsum debitis consequuntur voluptatum facilis exercitationem!

@@ -1,23 +1,18 @@
 <?php
     namespace controllers;
     
-    class SiteController
+    use core\Controller;
+    use core\Template;
+
+    class SiteController extends Controller
     {
         public function actionAdd()
         {
-            $template = new \core\Template('views/site/add.php');
-            return [
-                'Content' => $template->getHTML(),
-                'Title' => 'додавання сторінки'
-            ];
+            return $this->render();
         }
 
         public function actionIndex()
         {
-            $template = new \core\Template('views/site/index.php');
-            return [
-                'Content' => $template->getHTML(),
-                'Title' => 'головна сторінка'
-            ];
+            return $this->render();
         }
     } 

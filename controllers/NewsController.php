@@ -1,30 +1,53 @@
 <?php
     namespace controllers;
     
-    class NewsController
+    use core\Controller;
+    use core\Template;
+    
+    class NewsController extends Controller
     {
         public function actionAdd()
         {
-            $template = new \core\Template('views/news/add.php');
-            return [
-                'Content' => $template->getHTML(),
-                'Title' => 'додавання новини'
-            ];
+            return $this->render();
         }
 
         public function actionIndex()
         {
-            return [
-                'Content' => 'Index action',
-                'Title' => 'список новин'
-            ];
+            $db = \core\Core::get()->db;
+
+            $res=\models\Threads::findByCondition(['thread_id' => '4']);
+
+            // $thread = new \models\Threads();
+            // $thread->title = "!!!!!!!!";
+            // $thread->description = "desc!!!!";
+            // $thread->imgs_refs = "img2.png";
+            // $thread->category_id = "1";
+            // $thread->created_at = "2025-05-06 19:00:00";
+            // $thread->save();
+
+            // $rows = $db->select("threads", ["title", "description", "imgs_refs"], ['thread_id' => 2]);
+            // var_dump($rows);
+
+            // $db->insert('threads', [
+            //     'title' => 'news1',
+            //     'description' => 'desc',
+            //     'imgs_refs' => 'img2.jpg',
+            //     'category_id' => '1'
+            // ]);
+
+            // $db->delete('threads', ['thread_id' => 3]);
+
+            // $db->update('threads', [
+            //     'title' => '111111'
+            // ],[
+            //     'thread_id' => '2'
+            // ]);
+
+            return $this->render();
         }
 
         public function actionView($params)
         {
-            return [
-                'Content' => 'news View',
-                'Title' => 'перегляд новин'
-            ];
+            return $this->render();
         }
     } 

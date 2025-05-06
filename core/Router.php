@@ -4,7 +4,6 @@
     class Router
     {
         protected $route;
-        protected $indexTemplate;
         
         public function __construct($route)
         {
@@ -24,8 +23,13 @@
             {
                 $parts[1] = 'index';
             }
+
+            \core\Core::get()->moduleName = $parts[0];
+            \core\Core::get()->actionName = $parts[1];
+
             $controller = 'controllers\\'.ucfirst($parts[0]).'Controller';
             $method = 'action'.ucfirst($parts[1]);
+            
             if(class_exists($controller))
             {
                 $controllerObject = new $controller();
@@ -47,12 +51,17 @@
 
         public function done()
         {
-            $this->indexTemplate->display();
+            
         }
 
         public function error($code)
         {
             http_response_code($code);
-            echo $code;
+            switch($code)
+            {
+                case 404:
+                    echo '404 Not Found';
+                    break;
+            }
         }
     }
