@@ -4,7 +4,9 @@
 
 <form method = "POST">
   <?php if(!empty($error_message)) : ?>
-    <?= $error_message ?>
+    <div class="alert alert-danger" role="alert">
+      <?= $error_message ?>
+    </div>
   <?php endif; ?>  
   <div class="mb-3">
     <label for="inputEmail" class="form-label">Пошта \ Логін</label>

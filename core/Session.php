@@ -1,7 +1,5 @@
 <?php
     namespace core;
-
-   
     
     class Session
     {
@@ -18,7 +16,7 @@
             }
         }
 
-        public function get()
+        public function get($name)
         {
             if(empty($_SESSION[$name]))
             {
@@ -27,7 +25,7 @@
             return $_SESSION[$name];
         }
 
-        public function remote($name)
+        public function remove($name)
         {
             unset($_SESSION[$name]);
         }

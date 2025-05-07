@@ -4,6 +4,7 @@
     class Controller
     {
         protected $template;
+        protected $errorMessages;
 
         public $isPost = false;
         public $isGet = false;
@@ -28,6 +29,7 @@
             }
             $this->post = new \core\Post();
             $this->get = new \core\Get();
+            $this->errorMessages = [];
         }
 
         public function render($pathToView = null)
@@ -37,6 +39,24 @@
             return [
                 'Content' => $this->template->getHTML()
             ];
+        }
+
+        public function redirect($path)
+        {
+            header("Location: {$path}");
+            die;
+        }
+
+        public function addErrorMessage($message = null)
+        {
+            $this->errorMessages [] = $message;
+            $this->template->setParam('error_message', implode('<br/>', $this->errorMessages));
+        }
+
+        public function clearErrorMessage()
+        {
+            $this->errorMessages = [];
+            return $this->redirect('/lost_island/admins/login');
         }
     }
 ?>

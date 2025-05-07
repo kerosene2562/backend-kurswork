@@ -18,6 +18,19 @@
             }
         }
 
+        public static function FindByLogin($login)
+        {
+            $rows = self::findByCondition(['login' => $login]);
+            if(!empty($rows))
+            {
+                return $rows[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static function IsAdminLogged()
         {
             return !empty(\core\Core::get()->session->get('admin'));

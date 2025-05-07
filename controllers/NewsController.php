@@ -46,11 +46,9 @@
             // \core\Core::get()->session->set('user_id', 1);
             // $id = \core\Core::get()->session->get('user_id');
 
-            $row = \models\Admins::findById(1);
-            var_dump($row);
-            die;
+            //$row = \models\Admins::findById(1);
             
-            return $this->render('views/news/view.php');
+            return $this->render('views/news/index.php');
         }
 
         public function actionView($params)
