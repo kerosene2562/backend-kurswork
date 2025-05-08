@@ -45,5 +45,14 @@
         {
             \core\Core::get()->session->remove('admin');
         }
+
+        public static function RegisterAdmin($login, $password, $mail)
+        {
+            $admin = new \models\Admins();
+            $admin->login = $login;
+            $admin->password = $password;
+            $admin->mail = $mail;
+            $admin->save();
+        }
     }
 ?>

@@ -10,11 +10,11 @@
   <?php endif; ?>  
   <div class="mb-3">
     <label for="inputLogin" class="form-label">Логін</label>
-    <input name="login" class="form-control" id="inputLogin">
+    <input value="<?=$this->controller->post->login ?>" name="login" class="form-control" id="inputLogin">
   </div>
   <div class="mb-3">
     <label for="inputEmail" class="form-label">Пошта</label>
-    <input name="mail" class="form-control" id="inputEmail">
+    <input value="<?=$this->controller->post->email ?>" name="email" class="form-control" id="inputEmail">
   </div>
   <div class="mb-3">
     <label for="inputPassword" class="form-label">Пароль</label>

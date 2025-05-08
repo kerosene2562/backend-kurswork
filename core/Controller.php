@@ -58,5 +58,10 @@
             $this->errorMessages = [];
             return $this->redirect('/lost_island/admins/login');
         }
+
+        public function isErrorMessagesExist()
+        {
+            return count($this->errorMessages) > 0;
+        }
     }
 ?>

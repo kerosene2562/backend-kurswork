@@ -33,6 +33,7 @@
             if(class_exists($controller))
             {
                 $controllerObject = new $controller();
+                \core\Core::get()->controllerObject = $controllerObject;
                 if(method_exists($controllerObject, $method))
                 {
                     array_splice($parts, 0, 2);

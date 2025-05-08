@@ -30,27 +30,43 @@
             if($this->isPost)
             {
                 $admin = \models\Admins::FindByLogin($this->post->login);
+
                 if(!empty($admin))
                 {
                     $this->addErrorMessage('користувач з таким логіном вже існує');
+                }
+                
+                if(strlen($this->post->login) == 0)
+                {
+                    $this->addErrorMessage('логін не вказано');
                 }
                 if($this->post->password != $this->post->password2)
                 {
                     $this->addErrorMessage('паролі не співпадають');
                 }
-                if(empty($this->post->login))
-                {
-                    $this->addErrorMessage('логін не вказано');
-                }
-                if(empty($this->post->password))
+                if(strlen($this->post->password) == 0)
                 {
                     $this->addErrorMessage('пароль не вказано');
                 }
-                if(empty($this->post->mail))
+                if(strlen($this->post->password2) == 0)
+                {
+                    $this->addErrorMessage('повторний пароль не вказано');
+                }
+                if(strlen($this->post->email) == 0)
                 {
                     $this->addErrorMessage('пошту не вказано');
                 }
+                if(!$this->isErrorMessagesExist())
+                {
+                    \models\Admins::RegisterAdmin($this->post->login, $this->post->password, $this->post->email);
+                    return $this->redirect('/lost_island/admins/registersuccess');
+                }
             }
+            return $this->render();
+        }
+
+        public function actionRegisterSuccess()
+        {
             return $this->render();
         }
 
