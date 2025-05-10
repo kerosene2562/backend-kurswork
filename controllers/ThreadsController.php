@@ -4,7 +4,7 @@
     use core\Controller;
     use core\Template;
     
-    class NewsController extends Controller
+    class ThreadsController extends Controller
     {
         public function actionAdd()
         {
@@ -48,7 +48,7 @@
 
             //$row = \models\Admins::findById(1);
             
-            return $this->render('views/news/index.php');
+            return $this->render('views/threads/index.php');
         }
 
         public function actionView($params)

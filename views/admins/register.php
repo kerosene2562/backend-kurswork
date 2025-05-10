@@ -24,5 +24,5 @@
     <label for="inputPassword2" class="form-label">Пароль (повторити)</label>
     <input name="password2" type="password" class="form-control" id="inputPassword2">
   </div>
-  <button type="submit" class="btn btn-primary">Увійти</button>
+  <button type="submit" class="btn btn-primary">Зареєструвати</button>
 </form>

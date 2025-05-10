@@ -36,9 +36,7 @@
         {
             if(!empty($pathToView))
                 $this->template->setTemplateFilePath($pathToView);
-            return [
-                'Content' => $this->template->getHTML()
-            ];
+            return ['Content' => $this->template->getHTML()];
         }
 
         public function redirect($path)

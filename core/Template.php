@@ -34,20 +34,13 @@
             foreach($params as $key => $value)
             {
                 $this->setParam($key, $value);
+                
             }
         }
 
         public function getHTML()
         {
             ob_start();
-            /* 
-            $this->paramsArray = [
-                'Content' => '',
-                'Title' => ''
-            ];
-            $Content = '';
-            $Title = '';
-            */
             $this->controller = \core\Core::get()->controllerObject;
             extract($this->paramsArray);
             include($this->templateFilePath);

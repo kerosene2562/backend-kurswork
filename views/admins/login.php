@@ -9,8 +9,8 @@
     </div>
   <?php endif; ?>  
   <div class="mb-3">
-    <label for="inputEmail" class="form-label">Пошта \ Логін</label>
-    <input name="login" class="form-control" id="inputEmail">
+    <label for="inputLogin" class="form-label">Пошта \ Логін</label>
+    <input value="<?=\core\Core::get()->session->get('admin') ?>" name="login" class="form-control" id="inputLogin">
   </div>
   <div class="mb-3">
     <label for="inputPassword" class="form-label">Пароль</label>

@@ -59,7 +59,7 @@
                 if(!$this->isErrorMessagesExist())
                 {
                     \models\Admins::RegisterAdmin($this->post->login, $this->post->password, $this->post->email);
-                    return $this->redirect('/lost_island/admins/registersuccess');
+                    return $this->redirect('/lost_island/admins/login');
                 }
             }
             return $this->render();
