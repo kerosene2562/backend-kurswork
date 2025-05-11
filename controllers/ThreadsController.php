@@ -13,7 +13,14 @@
 
         public function actionIndex()
         {
-            //$db = \core\Core::get()->db;
+            if($this->isGet)
+            {
+                $category_id = $this->get->category_id;
+                
+                $db = \core\Core::get()->db;
+                $rows = $db->select("threads", "*", ['category_id' => $category_id]);
+                $this->template->setParam("threads", $rows);
+            }
 
             //$res=\models\Threads::findByCondition(['thread_id' => '4']);
 
@@ -24,9 +31,6 @@
             // $thread->category_id = "1";
             // $thread->created_at = "2025-05-06 19:00:00";
             // $thread->save();
-
-            // $rows = $db->select("threads", ["title", "description", "imgs_refs"], ['thread_id' => 2]);
-            // var_dump($rows);
 
             // $db->insert('threads', [
             //     'title' => 'news1',
@@ -48,7 +52,7 @@
 
             //$row = \models\Admins::findById(1);
             
-            return $this->render('views/threads/index.php');
+            return $this->render();
         }
 
         public function actionView($params)

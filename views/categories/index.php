@@ -33,8 +33,8 @@
             написано <b> <?= $countOfAllComments ?> </b> коментарів.
         </div>
         <div id="categories_block">
-             <?php foreach($Categories as $categorie) : ?>
-                <a href="categorie?=<?=$categorie["id"]?>"><?=$categorie["name"]?></a>
+             <?php foreach($Categories as $category) : ?>
+                <a href="/lost_island/threads/index?category_id=<?=$category["id"]?>"><?=$category["name"]?></a>
             <?php endforeach; ?>
         </div>
        

@@ -13,12 +13,6 @@
 
     class Threads extends \core\Model
     {
-        // public $id;
-        // public $title;
-        // public $description;
-        // public $imgs_refs;
-        // public $category_id;
-        // public $created_at;
         public static $tableName = 'threads';
     }
 ?>
