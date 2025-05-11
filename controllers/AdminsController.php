@@ -27,6 +27,7 @@
 
         public function actionRegister()
         {
+            if()
             if($this->isPost)
             {
                 $admin = \models\Admins::FindByLogin($this->post->login);
