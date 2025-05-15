@@ -1,3 +1,104 @@
-p{
+.content{
+    display: flex;
+    gap: 10px;
+    color: rgb(214, 214, 214);
+    align-items: flex-start;
+}
+
+.catalog_block{
+    width: 300px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.duscussion_block{
+    flex: 1;
+}
+
+.titleDiscussion{
+    border: 1px solid grey;
+    background-color: rgb(44, 44, 44);
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 1000px;
+}
+
+.title{
+    font-size: 20px;
+}
+
+.content_title{
+    display: block;
+}
+
+
+.img_container {
+    width: 250px;
+    height: 250px;
+    background-color: black;
+    justify-content: center;
+    overflow: hidden;
+}
+.img_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.img_name_text{
+    color: rgb(254, 177, 36);
+    font-size: 11px;
+}
+
+.description{
+
+}
+
+.comment_block{
+    border: 1px solid grey;
+    background-color: rgb(44, 44, 44);
+    width: min-content;
+    min-width: 500px;
+    max-width: 1000px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.comment_info_block{
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment_info_text_block{
+    display: flex;
+}
+
+.comment_info_text{
+    display: flex;
+    justify-content: left;
+    padding: 3px;
+}
+
+.comment_actions_block{
+    display: flex;
+    justify-content: left;
+    padding: 5px;
+}
+
+.action_button{
+    border-radius: 5px;
+    font-size: 10px;
+    height: 20px;
+    width: 50px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(171, 171, 171);
+    transition: all 0.5s;
+}
+
+.action_button:hover{
+    background-color: red;
     color: white;
+}
+
+.comment_text_block{
+    padding: 3px;
 }
