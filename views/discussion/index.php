@@ -38,7 +38,7 @@
                         <div class="comment_info_text_block">
                             <p class="comment_info_text">Anonim comment <?=$comment["id"]?></p>
                             <?php if(!is_null($comment["parent_comment_id"])) : ?>
-                                <p class="comment_info_text">replyed at <a href=""><?=$comment["parent_comment_id"]?></a></p>
+                                <p class="comment_info_text">replyed to <a href=""><?=$comment["parent_comment_id"]?></a></p>
                             <?php endif; ?>
                             <p class="comment_info_text"><?=$comment["post_datetime"]?></p>
                         </div>

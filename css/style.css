@@ -16,7 +16,6 @@ a{
     margin: 0 auto;
 }
 
-
 #header_logo_text
 {
     color: grey;
@@ -57,4 +56,10 @@ a{
     margin-top: 50px;
     line-height: 2;
     word-spacing: 10px;
+}
+
+.create_thread_button{
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 6px;
 }

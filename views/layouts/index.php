@@ -31,9 +31,14 @@
                     </a>
                     <li><a href="/lost_island/categories/index" class="nav-link px-2 link-secondary"><p id="header_logo_text">Lost_island</p></a></li>
                 </ul>
+                <?php if(strpos($_SERVER['REQUEST_URI'], '/threads/')) : ?>
+                    <div class="create_thread">
+                        <a href="/lost_island/threads/add"><button class="create_thread_button">Створити тред</button></a>
+                    </div>
+                <?php endif; ?>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                    <input type="search" class="form-control" placeholder="Пошук треда" aria-label="Search">
                 </form>
                 <?php if(\models\Admins::IsAdminLogged()) : ?>
                     <div class="dropdown text-end">
