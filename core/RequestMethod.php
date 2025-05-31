@@ -12,7 +12,7 @@
         
         public function __get($name)
         {
-            if(isset( $this->array[$name]))
+            if(isset($this->array[$name]))
                 return $this->array[$name];
             else
                 return null;

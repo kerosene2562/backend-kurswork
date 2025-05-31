@@ -8,8 +8,10 @@
 
         public $isPost = false;
         public $isGet = false;
+        public $isFiles = false;
         public $post;
         public $get;
+        public $files;
 
         public function __construct()
         {
@@ -27,8 +29,13 @@
                     $this->isGet = true;
                     break;
             }
+            if(!empty($_FILES['imgs_refs']))
+            {
+                $this->isFiles = true;
+            }
             $this->post = new \core\Post();
             $this->get = new \core\Get();
+            $this->files = new \core\Files();
             $this->errorMessages = [];
         }
 
