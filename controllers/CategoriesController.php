@@ -6,8 +6,8 @@
         public function actionIndex()
         {
             $db = \core\Core::get()->db;
-            $rows = $db->select("categories", "*");
-            $this->template->setParam("Categories", $rows);
+            $categories = $db->select("categories", "*");
+            $this->template->setParam("Categories", $categories);
 
             $countOfTreads = $db->select("threads", "*");
             $this->template->setParam("countOfTreads", count($countOfTreads));

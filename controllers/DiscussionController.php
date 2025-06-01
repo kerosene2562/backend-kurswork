@@ -27,16 +27,23 @@
 
             $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
             $this->template->setParam("selectedDiscussion", $comments);
+
+            $categories = $db->select("categories", "*");
+            $this->template->setParam("Categories", $categories);
         }
 
-        public function actionMethod()
+        public function actionGetDiscussion()
         {
-            $input = json_decode(file_get_contents("php://input"), true);
-        
-            $response = "Отримано: " . $input['data'];
+            $thread_id = $this->get->thread_id;
+            $db = \core\Core::get()->db;
 
-            echo $response;
+            $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
+
+            header('Content-Type: application/json');
+            echo json_encode($comments);
+            exit;
         }
+
 
         public function actionAdd()
         {

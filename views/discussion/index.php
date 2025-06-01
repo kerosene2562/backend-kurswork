@@ -6,7 +6,7 @@
     <title><?=$Title?></title>
     <link rel="stylesheet" href="/lost_island/css/discussion.css">
 </head>
-<body>
+<body onload="getDiscussion()">
     <div id="modal_overlay"></div>
     <div id="modal_reply_window">
         <div id="modal_close_button_block">
@@ -23,13 +23,16 @@
                 <label for="imgs" id="imgs_loader">Завантажити файл</label>
                 <input type="file" id="imgs" name="imgs_refs[]" multiple>
             </div>
-            <button type="submit" id="sub_button">Залишити коментар</button>
+            <button type="submit" id="sub_button" onclick="close_modal_window()">Залишити коментар</button>
         </form>
     </div>
 
     <div class="content">
         <div class="catalog_block">
-            <p class="comment_info_text"> тут буде розміщено сайдбар з різними каталогами для швидкого переходу між сторінками</p>
+            <p>Каталог тем:</p>
+            <?php foreach($Categories as $category) : ?>
+                <a href="/lost_island/threads/index?category_id=<?=$category["id"]?>">-- <?=$category["name"]?></a><br>
+            <?php endforeach; ?>
         </div>
 
         <div class="duscussion_block">
@@ -56,43 +59,11 @@
                     <p><?=$threadTitle[0]["created_at"]?></p>
                 </div>
             </div>
-            <?php foreach($selectedDiscussion as $comment) : ?>
-                <div class="comment_block">
-                    <div class="comment_info_block">
-                        <div class="comment_info_text_block">
-                            <p class="comment_info_text">Анонімний коментар №<?=$comment["id"]?></p>
-                            <?php if(!is_null($comment["parent_comment_id"])) : ?>
-                                <p class="comment_info_text"> | відповідь на <a href=""><?=$comment["parent_comment_id"]?></a></p>
-                            <?php endif; ?>
-                            <p class="comment_info_text"> | <?=$comment["post_datetime"]?></p>
-                        </div>
-                        <div class="comment_actions_block">
-                            <button class="action_button" onclick="replyTo(<?= $comment['id'] ?>)">відповісти</button>
-                            <button class="action_button">поскаржитись</button>
-                        </div>
-                    </div>
-                    <?php if(isset($comment["imgs_refs"])) : ?>
-                        <div class="imgs_block">
-                            <?php foreach(explode(" ", $comment["imgs_refs"]) as $img) : ?>
-                                <div>
-                                    <div class="img_container">
-                                        <img src="/lost_island/pics/<?=$img?>" alt="<?= $img ?>">
-                                    </div>
-                                    <p><a class="img_name_text" href="#"><?=$img?></a></p>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif;?>
-                    <div class="comment_text_block">
-                        <p class="comment_text"><?=$comment["comment"]?></p>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+            <div id="comments"></div>
             <button id onclick="replyTo('відповідь на тред')">Залишити коментар</button>
         </div>
     </div>
-    <button id="myButton">оновити</button>
-    <div id="result">jas;dlkf</div>
+    <button id="updateDiscussionButton" onclick="getDiscussion()">Оновити</button>
     <script src="/lost_island/scripts/discussion.js"></script>
 </body>
 </html>
