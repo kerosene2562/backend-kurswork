@@ -12,6 +12,7 @@
         public $post;
         public $get;
         public $files;
+        public $imgsUploader;
 
         public function __construct()
         {
@@ -36,6 +37,7 @@
             $this->post = new \core\Post();
             $this->get = new \core\Get();
             $this->files = new \core\Files();
+            $this->imgsUploader = new \core\ImgsUploader($this->files->imgs_refs);
             $this->errorMessages = [];
         }
 

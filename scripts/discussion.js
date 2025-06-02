@@ -31,10 +31,42 @@ function close_modal_window()
 {
     document.getElementById("modal_reply_window").style.display = 'none';
     document.getElementById('modal_overlay').style.display = 'none';
-    document.body.style.overflow = "visible";
+    document.getElementById('modal_media').style.display = 'none';
+    document.getElementById('media_video').style.display = 'none';
+    document.getElementById('media_video').pause();
+    document.getElementById('media_img').style.display = 'none';
+    document.body.style.overflow = "visibles";
 
     getDiscussion();
 }
+
+function showMedia(media)
+{
+    document.getElementById("modal_media").style.display = 'block';
+    document.getElementById('modal_overlay').style.display = 'block';
+
+    if(media.src.split(".")[1] == "mp4")
+    {
+        document.getElementById('media_video').style.display = 'block';
+        document.getElementById('media_video').src = media.src;
+        document.getElementById('bottom_info').innerHTML = "(" + media.videoWidth + "x" + media.videoHeight + ")";
+    }
+    else
+    {
+        document.getElementById('media_img').style.display = 'block';
+        document.getElementById('media_img').src = media.src;
+        document.getElementById('bottom_info').innerHTML = "(" + media.naturalWidth + "x" + media.naturalHeight + ")";
+    }
+    let mediaRef = media.src.split("/");
+    document.getElementById('top_info').innerHTML = mediaRef[6];
+}
+
+document.querySelector('body').addEventListener('click', function(media){
+    if (media.target.tagName === "IMG" || media.target.tagName === "VIDEO" ) 
+    {
+        showMedia(media.target);
+    }
+})
 
 function getDiscussion()
 {
@@ -109,11 +141,28 @@ function getDiscussion()
 
                         let imgContainer = document.createElement('div');
                         imgContainer.classList.add('img_container');
+                        
+                        let ext = imgRef.split(".")
+                        if(imgRef.split(".")[1] == "mp4")
+                        {
+                            let video = document.createElement('video');
+                            video.src = "/lost_island/pics/" + imgRef;
+                            video.alt = imgRef;
+                            imgContainer.appendChild(video);
+                            div.appendChild(imgContainer);
+                        }
+                        else
+                        {
+                            let img = document.createElement('img');
+                            img.src = "/lost_island/pics/" + imgRef;
+                            img.alt = imgRef;
+                            imgContainer.appendChild(img);
+                        }
+                        
 
-                        let img = document.createElement('img');
-                        img.src = "/lost_island/pics/" + imgRef;
-                        img.alt = imgRef;
-                        imgContainer.appendChild(img);
+                        let video = document.createElement('video');
+                        video.src = "/lost_island/pics/" + imgRef;
+                        video.alt = imgRef;
                         div.appendChild(imgContainer);
 
                         let aImgRef = document.createElement('a');
@@ -132,7 +181,7 @@ function getDiscussion()
 
                 let commentText = document.createElement('p');
                 commentText.classList.add('comment_text');
-                commentText.innerHTML = comment['comment'];
+                commentText.innerHTML = comment['comment'].replace(/\r?\n/g, "<br>");
                 commentTextBlock.appendChild(commentText);
 
                 commentBlock.appendChild(commentTextBlock);
@@ -141,7 +190,9 @@ function getDiscussion()
             });
         })
 }
-document.getElementById('reply_form').addEventListener('submit', function(event) {
+
+document.getElementById('reply_form').addEventListener('submit', function(event) 
+{
     event.preventDefault();
   
     const form = event.target;
@@ -152,4 +203,4 @@ document.getElementById('reply_form').addEventListener('submit', function(event)
       body: formData
     })
     getDiscussion();
-  });
+});

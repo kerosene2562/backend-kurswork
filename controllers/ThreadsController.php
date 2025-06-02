@@ -57,22 +57,10 @@
                 $thread->created_at = (new \DateTime('now'))->format('Y-m-d H:i:s');
                 $thread->pics_folder_uuid = $folder_uuid;
                 mkdir("pics/{$folder_uuid}", 0777);
-
-                $files = $this->files->imgs_refs;
-                $imgs = [];
-                for($i = 0; $i < count($files["name"]); $i++)
-                {
-                    $file_uuid = uniqid();
-                    $filename = $files['name'][$i];
-                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                    $path = $folder_uuid . "/" . $file_uuid . "." . $extension;
-                    $imgs[] = $path;
-                    move_uploaded_file($files['tmp_name'][$i], "pics/" . $path);
-                }
-                $thread->imgs_refs = json_encode($imgs);
-                
+                $thread->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);  
                 $thread->save();
-                return $this->redirect("/lost_island/threads/index?category_id=1");
+                
+                return $this->redirect("/lost_island/discussion/index?thread_id=1");
             }
         }
     } 

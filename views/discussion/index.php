@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/lost_island/css/discussion.css">
 </head>
 <body onload="getDiscussion()">
-    <div id="modal_overlay"></div>
+    <div id="modal_overlay" onclick="close_modal_window()"></div>
     <div id="modal_reply_window">
         <div id="modal_close_button_block">
             <button id="modal_close_button" onclick="close_modal_window()">&times;</button>
@@ -25,6 +25,19 @@
             </div>
             <button type="submit" id="sub_button" onclick="close_modal_window()">Залишити коментар</button>
         </form>
+    </div>
+
+    <div id="modal_media">
+        <div id="media_info">
+            <p id="top_info"></p>
+        </div>
+        <div id="img_container">
+            <img id="media_img" class="media" src="" alt="зображення">
+            <video id="media_video" class="media" controls width="300" autoplay></video>
+        </div>
+        <div id="media_info">
+            <p id="bottom_info"></p>
+        </div>
     </div>
 
     <div class="content">
@@ -46,14 +59,14 @@
                         <?php foreach($imgs as $img) : ?>
                             <div>
                                 <div class="img_container">
-                                    <img src="/lost_island/pics/<?=$img?>" alt="<?= $img ?>">
+                                    <img src="/lost_island/pics/<?=$img?>" alt="Зображення треду">
                                 </div>
                                 <p><a class="img_name_text" href="#"><?=explode("/", $img)[1]?></a></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="description">
-                        <p><?= $threadTitle["description"] ?></p>
+                        <p><?= nl2br($threadTitle["description"]) ?></p>
                     </div>
                 </div>
                 <div class="title_created_at">
