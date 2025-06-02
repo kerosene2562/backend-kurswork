@@ -29,15 +29,14 @@ function replyTo(id)
 
 function close_modal_window()
 {
+    getDiscussion();
     document.getElementById("modal_reply_window").style.display = 'none';
     document.getElementById('modal_overlay').style.display = 'none';
     document.getElementById('modal_media').style.display = 'none';
     document.getElementById('media_video').style.display = 'none';
     document.getElementById('media_video').pause();
     document.getElementById('media_img').style.display = 'none';
-    document.body.style.overflow = "visibles";
-
-    getDiscussion();
+    document.body.style.overflow = "visible";
 }
 
 function showMedia(media)

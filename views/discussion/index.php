@@ -56,12 +56,16 @@
                 <div class="content_title">
                     <div class="imgs_block">
                         <?php $imgs = json_decode($threadTitle["imgs_refs"]);?>
-                        <?php foreach($imgs as $img) : ?>
+                        <?php foreach($imgs as $media) : ?>
                             <div>
                                 <div class="img_container">
-                                    <img src="/lost_island/pics/<?=$img?>" alt="Зображення треду">
+                                    <?php if(explode(".", $media)[1] == "mp4") : ?>
+                                        <video src="/lost_island/pics/<?=$media?>" controls alt="Відео треду">
+                                    <?php else : ?>
+                                        <img src="/lost_island/pics/<?=$media?>" alt="Зображення треду">
+                                    <?php endif;?>
                                 </div>
-                                <p><a class="img_name_text" href="#"><?=explode("/", $img)[1]?></a></p>
+                                <p><a class="img_name_text" href="#"><?=explode("/", $media)[1]?></a></p>
                             </div>
                         <?php endforeach; ?>
                     </div>

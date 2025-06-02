@@ -15,7 +15,16 @@
         <?php foreach($threads as $thread) : ?>
             <a href="/lost_island/discussion/index?thread_id=<?=$thread["id"]?>">
                 <div class="thread_card">
-                    <img class="card_img" src = "<?="/lost_island/pics/" . json_decode($thread['imgs_refs'])[0]?>" alt="Головне зображення">
+                    <?php $media = json_decode($thread['imgs_refs'])[0]?>
+                    <?php if(explode(".", $media)[1] == "mp4") : ?>
+                        <div>
+                            <video src="/lost_island/pics/<?=$media?>" class="card_img" alt="Головне зображення">
+                        </div>
+                        
+                    <?php else : ?>
+                        <img src="/lost_island/pics/<?=$media?>" class="card_img" alt="Головне зображення">
+                    <?php endif; ?>
+                    
                     <div class="card_text">
                         <p><?=$thread["title"]?></p>
                     </div>
