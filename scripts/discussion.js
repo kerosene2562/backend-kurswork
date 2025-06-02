@@ -47,6 +47,7 @@ function getDiscussion()
             comments.forEach(comment => {
                 let commentBlock = document.createElement('div');
                 commentBlock.classList.add('comment_block');
+                commentBlock.id = "comment" + comment['id'];
 
                 let commentInfoBlock = document.createElement('div');
                 commentInfoBlock.classList.add('comment_info_block');
@@ -64,7 +65,7 @@ function getDiscussion()
                     let commentReplyTo = document.createElement('p');
                     commentReplyTo.classList.add('comment_info_text');
                     let refReplyedTo = document.createElement('a');
-                    refReplyedTo.href = "#";
+                    refReplyedTo.href = "#comment" + comment['parent_comment_id'];
                     refReplyedTo.innerHTML = comment['parent_comment_id'];
                     commentReplyTo.innerHTML = " | відповідь на <";
                     commentReplyTo.appendChild(refReplyedTo);
@@ -102,7 +103,7 @@ function getDiscussion()
 
                 if(comment['imgs_refs'] != null)
                 {
-                    let imgsArr = comment['imgs_refs'].split(" ");
+                    let imgsArr = JSON.parse(comment["imgs_refs"]);
                     imgsArr.forEach((imgRef) => {
                         let div = document.createElement('div');
 
@@ -117,7 +118,8 @@ function getDiscussion()
 
                         let aImgRef = document.createElement('a');
                         aImgRef.classList.add('img_name_text');
-                        aImgRef.innerHTML = imgRef;
+                        let splitedRef = imgRef.split("/");
+                        aImgRef.innerHTML = splitedRef[1];
                         aImgRef.href = "#";
                         div.appendChild(aImgRef);
 

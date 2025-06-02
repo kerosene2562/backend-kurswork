@@ -14,7 +14,7 @@
 
         private static $instance;
 
-
+        
         private function __construct()
         {
             $this->template = new \core\Template($this->defaultLayoutPath);

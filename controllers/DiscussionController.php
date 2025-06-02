@@ -20,10 +20,7 @@
             $db = \core\Core::get()->db;
 
             $threadTitle = $db->select("threads", "*", ["id" => $thread_id]);
-            $this->template->setParam("threadTitle", $threadTitle);
-
-            $imgs = explode(" ", $threadTitle[0]["imgs_refs"]);
-            $this->template->setParam("imgs", $imgs);
+            $this->template->setParam("threadTitle", $threadTitle[0]);
 
             $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
             $this->template->setParam("selectedDiscussion", $comments);
@@ -44,7 +41,6 @@
             exit;
         }
 
-
         public function actionAdd()
         {
             $id = $this->post->thread_id;
@@ -52,11 +48,27 @@
             $comment->thread_id = $this->post->thread_id;
             $comment->comment = $this->post->comment;
             $comment->parent_comment_id = $this->post->parent_comment_id;
-            if(implode(' ', $this->files->imgs_refs["name"]) != "")
-                $comment->imgs_refs = implode(' ', $this->files->imgs_refs["name"]);
+            
+            $db = \core\Core::get()->db;
+            $folder_uuid = $db->select("threads", "pics_folder_uuid", ["id" => $id])[0]["pics_folder_uuid"];
+            $files = $this->files->imgs_refs;
+            $imgs = [];
+            for($i = 0; $i < count($files["name"]); $i++)
+            {
+                if($files['name'][$i] != "")
+                {
+                    $file_uuid = uniqid();
+                    $filename = $files['name'][$i];
+                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+                    $path = $folder_uuid . "/" . $file_uuid . "." . $extension;
+                    $imgs[] = $path;
+                    move_uploaded_file($files['tmp_name'][$i], "pics/" . $path);
+                }
+            }
+            $comment->imgs_refs = json_encode($imgs);
+            
             $comment->post_datetime = (new \DateTime('now'))->format('Y-m-d H:i:s');
             $comment->save();
-            return $this->redirect("/lost_island//discussion/index?thread_id=$id");
         }
     }
 ?>

@@ -15,7 +15,7 @@
         <?php foreach($threads as $thread) : ?>
             <a href="/lost_island/discussion/index?thread_id=<?=$thread["id"]?>">
                 <div class="thread_card">
-                    <img class="card_img" src="/lost_island/pics/<?=explode(" ", $thread['imgs_refs'])[0]?>" alt="<?=$thread['imgs_refs']?>">
+                    <img class="card_img" src = "<?="/lost_island/pics/" . json_decode($thread['imgs_refs'])[0]?>" alt="Головне зображення">
                     <div class="card_text">
                         <p><?=$thread["title"]?></p>
                     </div>
@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </a>
-            
         <?php endforeach; ?>
     </div>
 </body>

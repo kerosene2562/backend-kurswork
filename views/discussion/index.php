@@ -16,12 +16,12 @@
             <img id="be_nice_img" src="/lost_island/assets/images/be_nice.png" alt="be_nice">
         </div>
         <form id="reply_form" action="add" method="POST" enctype="multipart/form-data">
-            <input name="thread_id" type="hidden" value="<?=$threadTitle[0]["id"]?>">
+            <input name="thread_id" type="hidden" value="<?=$threadTitle["id"]?>">
             <p id="replyed_to"></p>
             <textarea name="comment" id="comment_textarea" placeholder="Коментар може містити максимум 15000 символів..."></textarea>
             <div id="uploader">
                 <label for="imgs" id="imgs_loader">Завантажити файл</label>
-                <input type="file" id="imgs" name="imgs_refs[]" multiple>
+                <input type="file" id="imgs" name="imgs_refs[]" multiple hidden>
             </div>
             <button type="submit" id="sub_button" onclick="close_modal_window()">Залишити коментар</button>
         </form>
@@ -38,25 +38,26 @@
         <div class="duscussion_block">
             <div class="titleDiscussion">
                 <div class="title">
-                    <p><?= $threadTitle[0]["title"] ?></p>
+                    <p><?= $threadTitle["title"] ?></p>
                 </div>
                 <div class="content_title">
                     <div class="imgs_block">
+                        <?php $imgs = json_decode($threadTitle["imgs_refs"]);?>
                         <?php foreach($imgs as $img) : ?>
                             <div>
                                 <div class="img_container">
                                     <img src="/lost_island/pics/<?=$img?>" alt="<?= $img ?>">
                                 </div>
-                                <p><a class="img_name_text" href="#"><?=$img?></a></p>
+                                <p><a class="img_name_text" href="#"><?=explode("/", $img)[1]?></a></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="description">
-                        <p><?= $threadTitle[0]["description"] ?></p>
+                        <p><?= $threadTitle["description"] ?></p>
                     </div>
                 </div>
                 <div class="title_created_at">
-                    <p><?=$threadTitle[0]["created_at"]?></p>
+                    <p><?=$threadTitle["created_at"]?></p>
                 </div>
             </div>
             <div id="comments"></div>
