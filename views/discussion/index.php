@@ -1,3 +1,7 @@
+<?php
+    $this->Title = $threadTitle["title"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +28,22 @@
                 <input type="file" id="imgs" name="imgs_refs[]" multiple hidden>
             </div>
             <button type="submit" id="sub_button" onclick="close_modal_window()">Залишити коментар</button>
+        </form>
+    </div>
+
+    <div id="modal_report_window">
+        <div id="modal_close_button_block">
+            <button id="modal_close_button" onclick="close_modal_window()">&times;</button>
+        </div>
+        <div id="img_vault_boys">
+            <img id="report_img" src="/lost_island/assets/images/report_boy.png" alt="be_nice">
+        </div>
+        <p id="reported_on"></p>
+        <form id="report_form" action="report" method="POST" enctype="multipart/form-data">
+            <input type="text" name="reportedOnId" id="reportedOnId">
+            <input type="text" name="reportedType" id="reportedType" value="false">
+            <textarea name="reason" id="reason" placeholder="Скарга може містити максимум 15000 символів..."></textarea>
+            <button type="submit" id="sub_button" onclick="close_modal_window()">Надіслати репорт</button>
         </form>
     </div>
 
@@ -83,5 +103,10 @@
     </div>
     <button id="updateDiscussionButton" onclick="getDiscussion()">Оновити</button>
     <script src="/lost_island/scripts/discussion.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    <script>
+        //ClassicEditor.create(document.querySelector('#reason')).then(editor => {reasonEditor = editor;});
+
+    </script>
 </body>
 </html>

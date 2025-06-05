@@ -1,13 +1,11 @@
 <?php
     if(empty($Content))
         $Content = '';
-    if(empty($countOfTreads))
-        $countOfTreads = 100;
     if(empty($countOfAllTreads))
         $countOfAllTreads = 1000;
     if(empty($countOfAllComments))
         $countOfAllComments = 999;
-
+    $this->Title = "lost_island";
 ?>
 
 <!DOCTYPE html>

@@ -40,23 +40,6 @@
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control" placeholder="Пошук треда" aria-label="Search">
                 </form>
-                <?php if(\models\Admins::IsAdminLogged()) : ?>
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?php if(\models\Admins::IsAdminLogged()) : ?>
-                                <img src="" alt="mdo" width="32" height="32" class="rounded-circle">
-                            <?php endif;?>
-                        </a>
-                        
-                        <ul class="dropdown-menu text-small" style="">
-                            <li><a class="dropdown-item" href="#">Головна</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/lost_island/admins/logout">Sign out</a></li>
-                        </ul>
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
     </header>

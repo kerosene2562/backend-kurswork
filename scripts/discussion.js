@@ -27,6 +27,24 @@ function replyTo(id)
     }
 }
 
+function reportOn(id, isComment = false)
+{
+    document.getElementById("modal_report_window").style.display = 'block';
+    document.getElementById('modal_overlay').style.display = 'block';
+    document.getElementById('reportedOnId').value = id;
+    document.getElementById('reportedType').value = isComment ? 'comment' : 'thread';
+    document.getElementById("reason").value = "";
+    document.body.style.overflow = "hidden";
+    if(isComment)
+    {
+        document.getElementById('reported_on').textContent = "Репорт на коментар №" + id;
+    }
+    else
+    {
+        document.getElementById('reported_on').textContent = "Репорт на тред";
+    }
+}
+
 function close_modal_window()
 {
     getDiscussion();
@@ -36,6 +54,7 @@ function close_modal_window()
     document.getElementById('media_video').style.display = 'none';
     document.getElementById('media_video').pause();
     document.getElementById('media_img').style.display = 'none';
+    document.getElementById('modal_report_window').style.display = 'none';
     document.body.style.overflow = "visible";
 }
 
@@ -123,7 +142,7 @@ function getDiscussion()
                 let reportButton = document.createElement('button');
                 reportButton.classList.add('action_button');
                 reportButton.innerHTML = "поскаржитись";
-                //reportButton.onclick = reportTo(comment["id"]);
+                reportButton.onclick = function(){reportOn(comment["id"], 'comment')};
                 commentActionsBlock.appendChild(reportButton);
 
                 commentInfoBlock.appendChild(commentActionsBlock);
@@ -193,7 +212,21 @@ function getDiscussion()
 document.getElementById('reply_form').addEventListener('submit', function(event) 
 {
     event.preventDefault();
+    
+    //document.getElementById('reason').value = reasonEditor.getData();
+    const form = event.target;
+    const formData = new FormData(form);
   
+    fetch(form.action, {
+      method: 'POST',
+      body: formData
+    })
+    getDiscussion();
+});
+
+document.getElementById('report_form').addEventListener('submit', function(event) 
+{
+    event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
   

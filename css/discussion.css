@@ -8,9 +8,9 @@
 .catalog_block{
     width: 300px;
     border: 1px solid grey;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 15px;
-    
+    background-color: rgb(44, 44, 44);
 }
 
 .duscussion_block{
@@ -22,7 +22,7 @@
     background-color: rgb(44, 44, 44);
     border-radius: 10px;
     padding: 10px;
-    max-width: 1000px;
+    width: 1000px;
 }
 
 .title{
@@ -32,7 +32,6 @@
 .content_title{
     display: block;
 }
-
 
 .img_container {
     display: inline-block;
@@ -114,6 +113,48 @@
     background: rgba(0, 0, 0, 0.5); 
     z-index: 999;
     display: none;
+}
+
+#modal_report_window{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 1000;
+    width: 600px;
+    height: 700px;
+    background-color: rgb(54, 54, 54);
+    border-radius: 10px;
+    border: 1px solid grey;
+    display: none;
+    margin: 0;
+    padding: 10px;
+    padding-top: 0;
+    box-shadow: 0px 20px 40px black;
+    color: rgb(214, 214, 214);
+}
+#report_img{
+    width: 250px;
+    height: 250px;
+}
+#reportedOnId{
+    display: none;
+}
+#reportedType{
+    display: none;
+}
+#reason{
+    border-radius: 10px;
+    width: 100%;
+    height: 335px;
+    background-color: rgb(85, 85, 85);
+    resize: none;
+    overflow: auto;
+    transition: box-shadow 1s;
+}
+#reason:focus{
+    outline: none;
+    box-shadow: 0px 20px 30px black;
 }
 
 #modal_reply_window{

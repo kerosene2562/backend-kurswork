@@ -51,8 +51,19 @@
             $comment->comment = $this->post->comment;
             $comment->parent_comment_id = $this->post->parent_comment_id;
             $comment->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);
-            $comment->post_datetime = (new \DateTime('now'))->format('Y-m-d H:i:s');
             $comment->save();
+        }
+
+        public function actionReport()
+        {
+            $id = $this->post->reportedOnId;
+            $isComment = $this->post->reportedType;
+            
+            $report = new \models\Reports();
+            $report->reason = $this->post->reason;
+            $report->reported_id = $id;
+            $report->type = $isComment;
+            $report->save();
         }
     }
 ?>
