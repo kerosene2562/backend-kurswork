@@ -1,11 +1,11 @@
-.content{
+.content {
     display: flex;
     gap: 10px;
     color: rgb(214, 214, 214);
     align-items: flex-start;
 }
 
-.catalog_block{
+.catalog_block {
     width: 300px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -13,11 +13,11 @@
     background-color: rgb(44, 44, 44);
 }
 
-.duscussion_block{
+.duscussion_block {
     flex: 1;
 }
 
-.titleDiscussion{
+.titleDiscussion {
     border: 1px solid grey;
     background-color: rgb(44, 44, 44);
     border-radius: 10px;
@@ -25,36 +25,44 @@
     width: 1000px;
 }
 
-.title{
+.title {
     font-size: 20px;
 }
 
-.content_title{
+.deletedComment {
+    font-style: italic;
+    color: rgb(255, 153, 153);
+}
+
+.content_title {
     display: block;
 }
 
 .img_container {
     display: inline-block;
 }
-.img_container img, video{
+
+.img_container img,
+video {
     max-width: 150px;
     max-height: 150px;
     object-fit: contain;
     display: block;
 }
-.img_name_text{
+
+.img_name_text {
     display: block;
     text-align: center;
     color: rgb(254, 177, 36);
     font-size: 11px;
 }
 
-.imgs_block{
+.imgs_block {
     display: flex;
     gap: 10px;
 }
 
-.comment_block{
+.comment_block {
     border: 1px solid grey;
     background-color: rgb(44, 44, 44);
     width: min-content;
@@ -62,30 +70,31 @@
     margin-top: 10px;
     padding: 10px;
     border-radius: 10px;
+    transition: all 1s;
 }
 
-.comment_info_block{
+.comment_info_block {
     display: flex;
     justify-content: space-between;
 }
 
-.comment_info_text_block{
+.comment_info_text_block {
     display: flex;
 }
 
-.comment_info_text{
+.comment_info_text {
     display: flex;
     justify-content: left;
     padding: 3px;
 }
 
-.comment_actions_block{
+.comment_actions_block {
     display: flex;
     justify-content: left;
     padding: 5px;
 }
 
-.action_button{
+.action_button {
     border-radius: 5px;
     font-size: 10px;
     height: 20px;
@@ -95,31 +104,49 @@
     transition: all 0.5s;
 }
 
-.action_button:hover{
+.action_button:hover {
     background-color: red;
     color: white;
 }
 
-.comment_text_block{
+.comment_text_block {
     padding: 3px;
 }
 
-#modal_overlay{
+#imgs_block {
+    display: flex;
+    gap: 10px;
+}
+
+.uploaded_img_container {
+    display: inline-block;
+}
+
+.uploaded_img_container img {
+
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    display: block;
+    margin: 10px;
+}
+
+#modal_overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     display: none;
 }
 
-#modal_report_window{
+#modal_report_window {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     z-index: 1000;
     width: 600px;
     height: 700px;
@@ -133,17 +160,21 @@
     box-shadow: 0px 20px 40px black;
     color: rgb(214, 214, 214);
 }
-#report_img{
+
+#report_img {
     width: 250px;
     height: 250px;
 }
-#reportedOnId{
+
+#reportedOnId {
     display: none;
 }
-#reportedType{
+
+#reportedType {
     display: none;
 }
-#reason{
+
+#reason {
     border-radius: 10px;
     width: 100%;
     height: 335px;
@@ -151,17 +182,19 @@
     resize: none;
     overflow: auto;
     transition: box-shadow 1s;
+    resize: none;
 }
-#reason:focus{
+
+#reason:focus {
     outline: none;
     box-shadow: 0px 20px 30px black;
 }
 
-#modal_reply_window{
+#modal_reply_window {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     z-index: 1000;
     width: 600px;
     height: 700px;
@@ -173,13 +206,15 @@
     padding: 0;
     box-shadow: 0px 20px 40px black;
 }
-#modal_close_button_block{
+
+#modal_close_button_block {
     position: absolute;
     right: 0px;
     width: 50px;
     height: 50px;
 }
-#modal_close_button{
+
+#modal_close_button {
     width: 50px;
     height: 50px;
     background-color: transparent;
@@ -189,41 +224,52 @@
     color: black;
     transition: color 0.3s ease;
 }
-#modal_close_button:hover{
+
+#modal_close_button:hover {
     color: red;
 }
-#img_vault_boys{
+
+#img_vault_boys {
     display: flex;
     justify-content: center;
 }
-#be_nice_img{
+
+#be_nice_img {
     height: 230px;
     width: 200px;
 }
-#reply_form{
+
+#reply_form {
     margin-left: 10px;
     margin-right: 10px;
+    height: 200px;
 }
-#replyed_to{
+
+#replyed_to {
     color: rgb(214, 214, 214);
 }
-#comment_textarea{
+
+#comment_textarea {
     border-radius: 10px;
     width: 100%;
-    height: 300px;
+    height: 100%;
     background-color: rgb(85, 85, 85);
     transition: box-shadow 1s;
+    resize: none;
 }
-#comment_textarea:focus{
+
+#comment_textarea:focus {
     outline: none;
     box-shadow: 0px 20px 30px black;
 }
-#uploader{
+
+#uploader {
     margin-top: 15px;
     width: 100%;
     text-align: center;
 }
-#imgs_loader{
+
+#imgs_loader {
     width: 100%;
     font-size: 20px;
     color: rgb(214, 214, 214);
@@ -232,12 +278,16 @@
     padding: 5px;
     border-radius: 5px;
     transition: all 0.3s;
+    height: 140px;
+    border: 3px dashed gray;
 }
-#imgs_loader:hover{
+
+#imgs_loader:hover {
     background-color: rgb(148, 55, 55);
     box-shadow: 0px 10px 20px black;
 }
-#sub_button{
+
+#sub_button {
     width: 100%;
     font-size: 20px;
     border: none;
@@ -246,18 +296,19 @@
     margin-top: 15px;
     color: rgb(214, 214, 214);
     background-color: rgb(85, 85, 85);
-    transition: background-color, box-shadow  0.3s;
+    transition: background-color, box-shadow 0.3s;
 }
-#sub_button:hover{
+
+#sub_button:hover {
     background-color: rgb(148, 55, 55);
     box-shadow: 0px 10px 20px black;
 }
 
-#modal_media{
+#modal_media {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     z-index: 1000;
     width: auto;
     height: auto;
@@ -272,14 +323,16 @@
     box-shadow: 0px 20px 40px black;
     color: rgb(214, 214, 214);
 }
-#media_info{
+
+.media_info {
     height: 20px;
     width: 100%;
     margin: 0;
     padding: 0;
     text-align: center;
 }
-.media{
+
+.media {
     width: 100%;
     height: 100%;
     max-width: 800px;

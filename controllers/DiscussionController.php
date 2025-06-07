@@ -20,13 +20,24 @@
             $db = \core\Core::get()->db;
 
             $threadTitle = $db->select("threads", "*", ["id" => $thread_id]);
-            $this->template->setParam("threadTitle", $threadTitle[0]);
+            if(!empty($threadTitle))
+            {
+                $this->template->setParam("threadTitle", $threadTitle[0]);
 
-            $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
-            $this->template->setParam("selectedDiscussion", $comments);
+                $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
+                $this->template->setParam("selectedDiscussion", $comments);
 
-            $categories = $db->select("categories", "*");
-            $this->template->setParam("Categories", $categories);
+                $categories = $db->select("categories", "*");
+                $this->template->setParam("Categories", $categories);
+            }
+            else
+            {
+                http_response_code(404);
+                $res = http_response_code();
+                \core\Core::log($res);
+                include_once("views/404.php");
+                exit;
+            }
         }
 
         public function actionGetDiscussion()
@@ -34,7 +45,19 @@
             $thread_id = $this->get->thread_id;
             $db = \core\Core::get()->db;
 
-            $comments = $db->select("discussion", "*", ["thread_id" => $thread_id]);
+            $comments = [];
+            $commentsAll = $db->select("discussion", "*", ["thread_id" => $thread_id]);
+            foreach($commentsAll as $comment)
+            {
+                if($comment["is_deleted"])
+                {
+                   
+                    $comment["comment"] = "Коментар видалено...";
+                    $comment["imgs_refs"] = "[]"; 
+                }
+                $comments[] = $comment;
+                
+            }
 
             header('Content-Type: application/json');
             echo json_encode($comments);

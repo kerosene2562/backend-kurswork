@@ -1,12 +1,10 @@
-function replyTo(id)
-{
+function replyTo(id) {
     document.getElementById("modal_reply_window").style.display = 'block';
     document.getElementById("imgs").value = null;
     document.getElementById("comment_textarea").value = "";
     document.getElementById('modal_overlay').style.display = 'block';
     document.body.style.overflow = "hidden";
-    if(!isNaN(id))
-    {
+    if (!isNaN(id)) {
         document.getElementById('replyed_to').textContent = "Відповідь на коментар №" + id;
         let form = document.getElementById('reply_form');
         let input = document.createElement('input');
@@ -16,37 +14,31 @@ function replyTo(id)
         input.type = "hidden";
         form.appendChild(input);
     }
-    else
-    {
+    else {
         let i = document.getElementById('parent_comment_id');
-        if(i)
-        {
+        if (i) {
             i.remove();
         }
         document.getElementById('replyed_to').textContent = "Відповідь на тред";
     }
 }
 
-function reportOn(id, isComment = false)
-{
+function reportOn(id, isComment = false) {
     document.getElementById("modal_report_window").style.display = 'block';
     document.getElementById('modal_overlay').style.display = 'block';
     document.getElementById('reportedOnId').value = id;
     document.getElementById('reportedType').value = isComment ? 'comment' : 'thread';
     document.getElementById("reason").value = "";
     document.body.style.overflow = "hidden";
-    if(isComment)
-    {
+    if (isComment) {
         document.getElementById('reported_on').textContent = "Репорт на коментар №" + id;
     }
-    else
-    {
+    else {
         document.getElementById('reported_on').textContent = "Репорт на тред";
     }
 }
 
-function close_modal_window()
-{
+function close_modal_window() {
     getDiscussion();
     document.getElementById("modal_reply_window").style.display = 'none';
     document.getElementById('modal_overlay').style.display = 'none';
@@ -55,22 +47,29 @@ function close_modal_window()
     document.getElementById('media_video').pause();
     document.getElementById('media_img').style.display = 'none';
     document.getElementById('modal_report_window').style.display = 'none';
+    document.getElementById("imgs_loader").innerHTML = "Завантажити файл";
+    document.getElementById("imgs").value = "";
     document.body.style.overflow = "visible";
 }
 
-function showMedia(media)
-{
+function close_media() {
+    document.getElementById('modal_overlay').style.display = 'none';
+    document.getElementById('modal_media').style.display = 'none';
+    document.getElementById('media_video').style.display = 'none';
+    document.getElementById('media_video').pause();
+    document.getElementById('media_img').style.display = 'none';
+}
+
+function showMedia(media) {
     document.getElementById("modal_media").style.display = 'block';
     document.getElementById('modal_overlay').style.display = 'block';
 
-    if(media.src.split(".")[1] == "mp4")
-    {
+    if (media.src.split(".")[1] == "mp4") {
         document.getElementById('media_video').style.display = 'block';
         document.getElementById('media_video').src = media.src;
         document.getElementById('bottom_info').innerHTML = "(" + media.videoWidth + "x" + media.videoHeight + ")";
     }
-    else
-    {
+    else {
         document.getElementById('media_img').style.display = 'block';
         document.getElementById('media_img').src = media.src;
         document.getElementById('bottom_info').innerHTML = "(" + media.naturalWidth + "x" + media.naturalHeight + ")";
@@ -79,21 +78,37 @@ function showMedia(media)
     document.getElementById('top_info').innerHTML = mediaRef[6];
 }
 
-document.querySelector('body').addEventListener('click', function(media){
-    if (media.target.tagName === "IMG" || media.target.tagName === "VIDEO" ) 
-    {
+document.querySelector('body').addEventListener('click', function (media) {
+    if (media.target.tagName === "IMG" || media.target.tagName === "VIDEO") {
         showMedia(media.target);
     }
 })
 
-function getDiscussion()
-{
+document.querySelector('input[name = "imgs_refs[]"]').addEventListener('change', showLoadedImgs);
+
+function showLoadedImgs() {
+    let files = this.files;
+    document.getElementById("imgs_loader").innerHTML = "";
+    Array.from(files).forEach((file) => {
+        let imgContainer = document.createElement('div');
+        imgContainer.classList.add('uploaded_img_container');
+
+        let img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.alt = file.name;
+        imgContainer.appendChild(img);
+
+        document.getElementById("imgs_loader").appendChild(imgContainer);
+    });
+}
+
+function getDiscussion() {
     let threadId = document.querySelector('input[name="thread_id"]').value;
     fetch(`/lost_island/discussion/getDiscussion?thread_id=${threadId}`)
         .then(response => response.json())
         .then(comments => {
             const result = document.getElementById("comments");
-            result.innerHTML = ""; 
+            result.innerHTML = "";
             comments.forEach(comment => {
                 let commentBlock = document.createElement('div');
                 commentBlock.classList.add('comment_block');
@@ -109,9 +124,8 @@ function getDiscussion()
                 commentInfoText.classList.add('comment_info_text');
                 commentInfoText.innerHTML = "Анонімний коментар №" + comment['id'];
                 commentTextInfoBlock.appendChild(commentInfoText);
-                
-                if(comment['parent_comment_id'] != null)
-                {
+
+                if (comment['parent_comment_id'] != null) {
                     let commentReplyTo = document.createElement('p');
                     commentReplyTo.classList.add('comment_info_text');
                     let refReplyedTo = document.createElement('a');
@@ -136,13 +150,13 @@ function getDiscussion()
                 let replyButton = document.createElement('button');
                 replyButton.classList.add('action_button');
                 replyButton.innerHTML = "відповісти";
-                replyButton.onclick = function(){replyTo(comment["id"])};
+                replyButton.onclick = function () { replyTo(comment["id"]) };
                 commentActionsBlock.appendChild(replyButton);
 
                 let reportButton = document.createElement('button');
                 reportButton.classList.add('action_button');
                 reportButton.innerHTML = "поскаржитись";
-                reportButton.onclick = function(){reportOn(comment["id"], 'comment')};
+                reportButton.onclick = function () { reportOn(comment["id"], 'comment') };
                 commentActionsBlock.appendChild(reportButton);
 
                 commentInfoBlock.appendChild(commentActionsBlock);
@@ -151,32 +165,29 @@ function getDiscussion()
                 let imgsBlock = document.createElement('div');
                 imgsBlock.classList.add('imgs_block');
 
-                if(comment['imgs_refs'] != null)
-                {
+                if (comment['imgs_refs'] != null) {
                     let imgsArr = JSON.parse(comment["imgs_refs"]);
                     imgsArr.forEach((imgRef) => {
                         let div = document.createElement('div');
 
                         let imgContainer = document.createElement('div');
                         imgContainer.classList.add('img_container');
-                        
+
                         let ext = imgRef.split(".")
-                        if(imgRef.split(".")[1] == "mp4")
-                        {
+                        if (imgRef.split(".")[1] == "mp4") {
                             let video = document.createElement('video');
                             video.src = "/lost_island/pics/" + imgRef;
                             video.alt = imgRef;
                             imgContainer.appendChild(video);
                             div.appendChild(imgContainer);
                         }
-                        else
-                        {
+                        else {
                             let img = document.createElement('img');
                             img.src = "/lost_island/pics/" + imgRef;
                             img.alt = imgRef;
                             imgContainer.appendChild(img);
                         }
-                        
+
 
                         let video = document.createElement('video');
                         video.src = "/lost_island/pics/" + imgRef;
@@ -199,40 +210,40 @@ function getDiscussion()
 
                 let commentText = document.createElement('p');
                 commentText.classList.add('comment_text');
+                if (comment['is_deleted']) {
+                    commentText.classList.add('deletedComment');
+                }
                 commentText.innerHTML = comment['comment'].replace(/\r?\n/g, "<br>");
                 commentTextBlock.appendChild(commentText);
 
                 commentBlock.appendChild(commentTextBlock);
-            
+
                 result.appendChild(commentBlock);
             });
         })
 }
 
-document.getElementById('reply_form').addEventListener('submit', function(event) 
-{
+document.getElementById('reply_form').addEventListener('submit', function (event) {
     event.preventDefault();
-    
     //document.getElementById('reason').value = reasonEditor.getData();
     const form = event.target;
     const formData = new FormData(form);
-  
+
     fetch(form.action, {
-      method: 'POST',
-      body: formData
+        method: 'POST',
+        body: formData
     })
     getDiscussion();
 });
 
-document.getElementById('report_form').addEventListener('submit', function(event) 
-{
+document.getElementById('report_form').addEventListener('submit', function (event) {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
-  
+
     fetch(form.action, {
-      method: 'POST',
-      body: formData
+        method: 'POST',
+        body: formData
     })
     getDiscussion();
 });

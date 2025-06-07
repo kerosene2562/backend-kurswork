@@ -51,6 +51,7 @@
         public function redirect($path)
         {
             header("Location: {$path}");
+            \core\Core::log(http_response_code(302));
             die;
         }
 

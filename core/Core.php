@@ -49,5 +49,11 @@
             }
             return self::$instance;
         }
+
+        public static function log($code)
+        {
+            $core = self::get();
+            \models\Logger::addLog($code, $core->moduleName, $core->actionName);
+        }
     }
 ?>

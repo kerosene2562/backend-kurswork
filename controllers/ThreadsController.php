@@ -31,14 +31,6 @@
             //     'category_id' => '1'
             // ]);
 
-            // $db->delete('threads', ['thread_id' => 3]);
-
-            // $db->update('threads', [
-            //     'title' => '111111'
-            // ],[
-            //     'thread_id' => '2'
-            // ]);
-
             // \core\Core::get()->session->set('user_id', 1);
             // $id = \core\Core::get()->session->get('user_id');
 
@@ -56,11 +48,13 @@
                 $thread->category_id = $this->post->category_id;
                 $thread->created_at = (new \DateTime('now'))->format('Y-m-d H:i:s');
                 $thread->pics_folder_uuid = $folder_uuid;
-                mkdir("pics/{$folder_uuid}", 0777);
+                mkdir("pics/{$folder_uuid}", 0777, true);
                 $thread->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);  
                 $thread->save();
                 
-                return $this->redirect("/lost_island/discussion/index?thread_id=1");
+                $db = \core\Core::get()->db;
+                $createdThread = $db->select('threads', 'id', ["pics_folder_uuid" => $folder_uuid]);
+                return $this->redirect("/lost_island/discussion/index?thread_id={$createdThread[0]['id']}");
             }
         }
     } 

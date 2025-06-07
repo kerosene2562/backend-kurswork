@@ -23,6 +23,7 @@
             <input name="thread_id" type="hidden" value="<?=$threadTitle["id"]?>">
             <p id="replyed_to"></p>
             <textarea name="comment" id="comment_textarea" placeholder="Коментар може містити максимум 15000 символів..."></textarea>
+            <div id="imgs_block"></div>
             <div id="uploader">
                 <label for="imgs" id="imgs_loader">Завантажити файл</label>
                 <input type="file" id="imgs" name="imgs_refs[]" multiple hidden>
@@ -47,15 +48,15 @@
         </form>
     </div>
 
-    <div id="modal_media">
-        <div id="media_info">
+    <div id="modal_media" onclick="close_media()">
+        <div class="media_info">
             <p id="top_info"></p>
         </div>
         <div id="img_container">
             <img id="media_img" class="media" src="" alt="зображення">
             <video id="media_video" class="media" controls width="300" autoplay></video>
         </div>
-        <div id="media_info">
+        <div class="media_info">
             <p id="bottom_info"></p>
         </div>
     </div>
@@ -106,7 +107,27 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     <script>
         //ClassicEditor.create(document.querySelector('#reason')).then(editor => {reasonEditor = editor;});
-
+        window.addEventListener('load', () => {
+        let hash = window.location.hash;
+        if (hash) 
+        {
+            setTimeout(() => {
+            let target = document.querySelector(hash);
+            if (target) 
+            {
+                target.scrollIntoView({ behavior: 'smooth' });
+                target.style.backgroundColor = 'rgb(128, 80, 80)'; 
+            }
+            }, 100);
+            setTimeout(() => {
+            let target = document.querySelector(hash);
+            if (target) 
+            {
+                target.style.backgroundColor = 'rgb(44, 44, 44)'; 
+            }
+            }, 2000);
+        }
+        });
     </script>
 </body>
 </html>

@@ -42,11 +42,13 @@
                 else
                 {
                     $this->error(404);
+                    \core\Core::log(http_response_code());
                 }
             }
             else
             {
                 $this->error(404);
+                \core\Core::log(http_response_code());
             }
         }
 
@@ -61,7 +63,7 @@
             switch($code)
             {
                 case 404:
-                    echo '404 Not Found';
+                    echo "404 Not Found";
                     break;
             }
         }
