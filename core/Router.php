@@ -42,13 +42,11 @@
                 else
                 {
                     $this->error(404);
-                    \core\Core::log(http_response_code());
                 }
             }
             else
             {
                 $this->error(404);
-                \core\Core::log(http_response_code());
             }
         }
 
@@ -60,11 +58,17 @@
         public function error($code)
         {
             http_response_code($code);
-            switch($code)
+            \core\Core::log(http_response_code());
+            $path = "views/errors/{$code}.php";
+            if(file_exists($path))
             {
-                case 404:
-                    echo "404 Not Found";
-                    break;
+                include_once("views/errors/{$code}.php");
             }
+            else
+            {
+                echo "Помилка {$code}";
+            }
+            
+            exit;
         }
     }

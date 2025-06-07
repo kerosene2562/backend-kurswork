@@ -16,8 +16,9 @@
 
         private function getIndexData()
         {
+            $core = \core\Core::get();
             $thread_id = $this->get->thread_id;
-            $db = \core\Core::get()->db;
+            $db = $core->db;
 
             $threadTitle = $db->select("threads", "*", ["id" => $thread_id]);
             if(!empty($threadTitle))
@@ -32,11 +33,7 @@
             }
             else
             {
-                http_response_code(404);
-                $res = http_response_code();
-                \core\Core::log($res);
-                include_once("views/404.php");
-                exit;
+                $core->error(404);
             }
         }
 

@@ -55,5 +55,11 @@
             $core = self::get();
             \models\Logger::addLog($code, $core->moduleName, $core->actionName);
         }
+
+        public static function error($code)
+        {
+            $core = self::get();
+            $core->router->error($code);
+        }
     }
 ?>
