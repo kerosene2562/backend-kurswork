@@ -23,6 +23,9 @@
                 $db = \core\Core::get()->db;
                 $threads = $db->select("threads", "*", ['category_id' => $category_id, 'is_deleted' => 0]);
                 $this->template->setParam("threads", $threads);
+
+                $comments = $db->select("discussion", "*", ["is_deleted" => 0], "ORDER BY thread_id");
+                $this->template->setParam("comments", $comments);
             }
             return $this->render();
         }

@@ -1,4 +1,5 @@
 .threads_block {
+    max-width: 1500px;
     align-items: center;
     justify-content: center;
     display: flex;
