@@ -59,10 +59,10 @@
         {
             http_response_code($code);
             \core\Core::log(http_response_code());
-            $path = "views/errors/{$code}.php";
+            $path = "views/errorPage.php";
             if(file_exists($path))
             {
-                include_once("views/errors/{$code}.php");
+                include_once($path);
             }
             else
             {

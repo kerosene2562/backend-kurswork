@@ -17,7 +17,7 @@
             <button id="modal_close_button" onclick="close_modal_window()">&times;</button>
         </div>
         <div id="img_vault_boys">
-            <img id="be_nice_img" src="/lost_island/assets/images/be_nice.png" alt="be_nice">
+            <img id="be_nice_img" src="/lost_island/assets/images/be_nice.gif" alt="be_nice">
         </div>
         <form id="reply_form" action="add" method="POST" enctype="multipart/form-data">
             <input name="thread_id" type="hidden" value="<?=$threadTitle["id"]?>">
@@ -81,7 +81,7 @@
                             <div>
                                 <div class="img_container">
                                     <?php if(explode(".", $media)[1] == "mp4") : ?>
-                                        <video src="/lost_island/pics/<?=$media?>" controls alt="Відео треду">
+                                        <video src="/lost_island/pics/<?=$media?>" alt="Відео треду">
                                     <?php else : ?>
                                         <img src="/lost_island/pics/<?=$media?>" alt="Зображення треду">
                                     <?php endif;?>

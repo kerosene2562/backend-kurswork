@@ -72,6 +72,7 @@
             $comment->parent_comment_id = $this->post->parent_comment_id;
             $comment->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);
             $comment->save();
+            exit;
         }
 
         public function actionReport()

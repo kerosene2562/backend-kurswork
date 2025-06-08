@@ -48,7 +48,6 @@ function close_modal_window() {
     document.getElementById('media_img').style.display = 'none';
     document.getElementById('modal_report_window').style.display = 'none';
     document.getElementById("imgs_loader").innerHTML = "Завантажити файл";
-    document.getElementById("imgs").value = "";
     document.body.style.overflow = "visible";
 }
 
@@ -90,15 +89,23 @@ function showLoadedImgs() {
     let files = this.files;
     document.getElementById("imgs_loader").innerHTML = "";
     Array.from(files).forEach((file) => {
-        let imgContainer = document.createElement('div');
-        imgContainer.classList.add('uploaded_img_container');
+        let mediaContainer = document.createElement('div');
+        mediaContainer.classList.add('uploaded_img_container');
 
-        let img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        img.alt = file.name;
-        imgContainer.appendChild(img);
+        let media;
+        if (file["type"] == "video/mp4") {
+            media = document.createElement('video');
+        }
+        else {
+            media = document.createElement('img');
+        }
 
-        document.getElementById("imgs_loader").appendChild(imgContainer);
+        media.src = URL.createObjectURL(file);
+        media.alt = file.name;
+        media.classList.add('media_loader');
+        mediaContainer.appendChild(media);
+
+        document.getElementById("imgs_loader").appendChild(mediaContainer);
     });
 }
 
@@ -245,5 +252,6 @@ document.getElementById('report_form').addEventListener('submit', function (even
         method: 'POST',
         body: formData
     })
+
     getDiscussion();
 });

@@ -8,6 +8,9 @@
     {
         public function actionAdd()
         {
+            $db = \core\Core::get()->db;
+            $categories = $db->select("categories", "*");
+            $this->template->setParam("categories", $categories);
             return $this->render();
         }
 
@@ -18,23 +21,10 @@
                 $category_id = $this->get->category_id;
                 
                 $db = \core\Core::get()->db;
-                $threads = $db->select("threads", "*", ['category_id' => $category_id]);
+                $threads = $db->select("threads", "*", ['category_id' => $category_id, 'is_deleted' => 0]);
                 $this->template->setParam("threads", $threads);
             }
             return $this->render();
-            //$res=\models\Threads::findByCondition(['thread_id' => '4']);
-
-            // $db->insert('threads', [
-            //     'title' => 'news1',
-            //     'description' => 'desc',
-            //     'imgs_refs' => 'img2.jpg',
-            //     'category_id' => '1'
-            // ]);
-
-            // \core\Core::get()->session->set('user_id', 1);
-            // $id = \core\Core::get()->session->get('user_id');
-
-            //$row = \models\Admins::findById(1);
         }
 
         public function actionCreateThread()
@@ -54,7 +44,13 @@
                 
                 $db = \core\Core::get()->db;
                 $createdThread = $db->select('threads', 'id', ["pics_folder_uuid" => $folder_uuid]);
+                http_response_code(201);
                 return $this->redirect("/lost_island/discussion/index?thread_id={$createdThread[0]['id']}");
             }
+        }
+
+        public function actionRules()
+        {
+            return $this->redirect("/lost_island/categories/rules");
         }
     } 

@@ -122,8 +122,7 @@ video {
     display: inline-block;
 }
 
-.uploaded_img_container img {
-
+.media_loader {
     max-width: 100px;
     max-height: 100px;
     object-fit: contain;

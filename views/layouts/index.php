@@ -31,7 +31,7 @@
                     </a>
                     <li><a href="/lost_island/categories/index" class="nav-link px-2 link-secondary"><p id="header_logo_text">Lost_island</p></a></li>
                 </ul>
-                <?php if(strpos($_SERVER['REQUEST_URI'], '/threads/')) : ?>
+                <?php if(strpos($_SERVER['REQUEST_URI'], '/threads')) : ?>
                     <div class="create_thread">
                         <a href="/lost_island/threads/add"><button class="create_thread_button">Створити тред</button></a>
                     </div>
