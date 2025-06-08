@@ -1,24 +1,25 @@
-a{
+.threads_block {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.thread_card_ref {
     text-decoration: none;
-    color: black;
+    color: rgb(214, 214, 214);
 }
 
-.card_img{
-    width: 230px;
-    height: 230px;
-    margin-top: 5px;
-    margin-left: 5px;
-    border-radius: 10px;
-}
-
-.thread_card{
-    text-align: justify;
-    border: 0.5px solid grey;
-    padding: 5px;
+.thread_card {
+    padding-top: 10px;
+    text-align: center;
     position: relative;
     width: 250px;
     height: 420px;
-    background-color: rgb(55, 58, 69);
+    border: 1px solid grey;
+    background-color: rgb(44, 44, 44);
     border-radius: 10px;
     margin: 10px;
     transition: transform 0.3s ease;
@@ -26,38 +27,47 @@ a{
     z-index: 1;
     transform-origin: top;
 }
-.thread_card:hover{
+
+.thread_card:hover {
+    min-height: 420px;
     height: auto;
     transform: scale(1.4);
     z-index: 2;
 }
 
-.card_text{
-    font-size: 14px;
+.card_img {
+    max-width: 230px;
+    max-height: 230px;
+    object-fit: contain;
+    border-radius: 10px;
 }
 
-.card_desc{
+.text {
+    padding: 0;
+    margin: 0;
+}
+
+.post_data {
+    padding-top: 10px;
+}
+
+.card_text {
+    padding: 0 5px 0 5px;
+    text-align: justify;
     font-size: 14px;
-    display: -webkit-box;
-    line-clamp: none;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    font-weight: bold;
+    background-color: rgb(85, 85, 85);
+}
+
+.card_desc {
+    padding: 0 5px 0 5px;
+    text-align: justify;
+    font-size: 14px;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .thread_card:hover .card_desc {
-    line-clamp: none;
-    -webkit-line-clamp: unset;
     display: block;
     overflow: visible;
-}
-
-.threads_block{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    flex-wrap: wrap;
 }
