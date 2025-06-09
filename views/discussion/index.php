@@ -72,7 +72,8 @@
         <div class="duscussion_block">
             <div class="titleDiscussion">
                 <div class="title">
-                    <p><?= $threadTitle["title"] ?></p>
+                    <p class="title_text"><?= $threadTitle["title"] ?></p>
+                    <button class="action_button" onclick="reportOn(<?=$threadTitle['id']?>)">Поскаржитись</button>
                 </div>
                 <div class="content_title">
                     <div class="imgs_block">
@@ -104,9 +105,7 @@
     </div>
     <button id="updateDiscussionButton" onclick="getDiscussion()">Оновити</button>
     <script src="/lost_island/scripts/discussion.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     <script>
-        //ClassicEditor.create(document.querySelector('#reason')).then(editor => {reasonEditor = editor;});
         window.addEventListener('load', () => {
         let hash = window.location.hash;
         if (hash) 

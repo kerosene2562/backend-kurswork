@@ -1,4 +1,4 @@
-.threads_block {
+#threads_block {
     max-width: 1500px;
     align-items: center;
     justify-content: center;
@@ -71,4 +71,58 @@
 .thread_card:hover .card_desc {
     display: block;
     overflow: visible;
+}
+
+.tools_block {
+    display: flex;
+    width: 100%;
+    height: min-content;
+    justify-content: center;
+    text-align: center;
+}
+
+.tools {
+    display: block;
+    width: 700px;
+    background-color: rgb(44, 44, 44);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#search {
+    width: 70%;
+    border-radius: 10px;
+    color: rgb(214, 214, 214);
+    background-color: rgb(85, 85, 85);
+}
+
+#search:focus {
+    outline: none;
+}
+
+#search_button {
+    width: 80px;
+}
+
+#sort_by {
+    height: 30px;
+    border-radius: 10px;
+    color: rgb(214, 214, 214);
+    background-color: rgb(85, 85, 85);
+    overflow: hidden;
+}
+
+#sort_by:focus {
+    outline: none;
+}
+
+.create_thread_button {
+    margin-top: 10px;
+    width: 400px;
+    background-color: rgb(125, 177, 114);
+    color: rgb(214, 214, 214);
+}
+
+.create_thread_button:hover {
+    background-color: rgb(0, 193, 0);
 }

@@ -10,64 +10,19 @@
     <link rel="stylesheet" href="/lost_island/css/threads.css">
     <title><?= $Title ?></title>
 </head>
-<body>
-    <div class="threads_block">
-        <?php
-            $statsComments = [];
-            $statsMedia = [];
-            foreach($comments as $comment)
-            {
-                if(array_key_exists($comment["thread_id"], $statsComments))
-                {
-                    $statsComments[$comment["thread_id"]]++;
-                    $statsMedia[$comment["thread_id"]] += count(json_decode($comment["imgs_refs"]));
-                }
-                else
-                {
-                    $statsMedia[$comment["thread_id"]] = count(json_decode($comment["imgs_refs"]));
-                    $statsComments[$comment["thread_id"]] = 1;
-                }
-            }
-        ?>
-        <?php foreach($threads as $thread) : ?>
-            <?php
-                if(!isset($statsComments[$thread["id"]]))  
-                {
-                    $statsComments[$thread["id"]] = 1;
-                    $statsMedia[$thread["id"]] = 0;
-                }  
-                if(isset($statsMedia[$thread["id"]]))  
-                {
-                    $statsMedia[$thread["id"]] += count(json_decode($thread["imgs_refs"]));
-                }
-            ?>
-            <a class="thread_card_ref" href="/lost_island/discussion/index?thread_id=<?=$thread["id"]?>">
-                <div class="thread_card">
-                    <?php $media = json_decode($thread['imgs_refs'])[0]?>
-                    <?php if(explode(".", $media)[1] == "mp4") : ?>
-                        <div>
-                            <video src="/lost_island/pics/<?=$media?>" class="card_img" alt="Головне зображення">
-                        </div>
-                        
-                    <?php else : ?>
-                        <img src="/lost_island/pics/<?=$media?>" class="card_img" alt="Головне зображення">
-                    <?php endif; ?>
-                    
-                    <div class="post_data">
-                        <p class="text"><?=$thread["created_at"]?></p>
-                    </div>
-                    <div>
-                        <p class="text">Постів <?=$statsComments[$thread["id"]]?> / Файлів <?=$statsMedia[$thread["id"]]?></p>
-                    </div>
-                    <div class="card_text">
-                        <p class="text"><?=$thread["title"]?></p>
-                    </div>
-                    <div class="card_desc">
-                        <p class="text"><?=$thread["description"]?></p>
-                    </div>
-                </div>
-            </a>
-        <?php endforeach; ?>
+<body onload="getThreads()">
+    <div class="tools_block">
+        <div class="tools">
+            <input type="text" id="category_id" style="display:none;" value = "<?=$category_id?>">
+            <input type="text" id="search">
+            <select id="sort_by">
+                <option value="time">по часу</option>
+                <option value="bamp">по популярності</option>
+            </select>
+            <a href="/lost_island/threads/add"><button class="create_thread_button">Створити тред</button></a>
+        </div>
     </div>
+    <div id="threads_block">
+    <script src="/lost_island/scripts/threads.js"></script>
 </body>
 </html>

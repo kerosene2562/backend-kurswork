@@ -17,17 +17,80 @@
         public function actionIndex()
         {
             if($this->isGet)
-            {
+            {                
                 $category_id = $this->get->category_id;
-                
-                $db = \core\Core::get()->db;
-                $threads = $db->select("threads", "*", ['category_id' => $category_id, 'is_deleted' => 0]);
-                $this->template->setParam("threads", $threads);
-
-                $comments = $db->select("discussion", "*", ["is_deleted" => 0], "ORDER BY thread_id");
-                $this->template->setParam("comments", $comments);
+                $this->template->setParam('category_id', $category_id);
             }
             return $this->render();
+        }
+
+        public function actionGetThreads(){
+            $category_id = $this->get->category_id;
+            $like = $this->get->search;
+            $sort_by = $this->get->sort_by;
+            $db = \core\Core::get()->db;
+
+            $search = "";
+            if($like != "")
+            {
+                $search = " AND title LIKE '%{$like}%'";
+            }
+            if($sort_by == "time")
+            {
+                $search .= " ORDER BY created_at";
+            }
+
+            $statsComments = [];
+            $statsMedia = [];
+            $comments = $db->select("discussion", "*", ["is_deleted" => 0], "ORDER BY thread_id");
+            foreach($comments as $comment)
+            {
+                if(array_key_exists($comment["thread_id"], $statsComments))
+                {
+                    $statsComments[$comment["thread_id"]]++;
+                    $statsMedia[$comment["thread_id"]] += count(json_decode($comment["imgs_refs"]));
+                }
+                else
+                {
+                    $statsMedia[$comment["thread_id"]] = count(json_decode($comment["imgs_refs"]));
+                    $statsComments[$comment["thread_id"]] = 1;
+                }
+            }
+
+            $threads = [];
+            $threadsAll = $db->select("threads", "*", ["category_id" => $category_id], $search);
+            foreach($threadsAll as $thread)
+            {
+                if($thread["is_deleted"])
+                {
+                   continue;
+                }
+                $threads[] = $thread;
+            }
+            
+            foreach($threads as $index => $thread)
+            {
+                if(isset($statsComments[$thread['id']]))
+                {
+                    $threads[$index]['statsCom'] = $statsComments[$thread['id']];
+                    $threads[$index]['statsMedia'] = $statsMedia[$thread['id']];
+                }
+                else
+                {
+                    $threads[$index]['statsCom'] = 0;
+                    $threads[$index]['statsMedia'] = 0;
+                }
+            }
+
+            if($sort_by == "bamp"){
+                usort($threads, function($a, $b){
+                    return $b['statsCom'] <=> $a['statsCom'];
+                });
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($threads);
+            exit;
         }
 
         public function actionCreateThread()

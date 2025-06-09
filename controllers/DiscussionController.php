@@ -21,7 +21,7 @@
             $db = $core->db;
 
             $threadTitle = $db->select("threads", "*", ["id" => $thread_id]);
-            if(!empty($threadTitle))
+            if(!empty($threadTitle) && $threadTitle[0]["is_deleted"] == 0)
             {
                 $this->template->setParam("threadTitle", $threadTitle[0]);
 

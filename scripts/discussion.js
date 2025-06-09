@@ -154,19 +154,22 @@ function getDiscussion() {
                 let commentActionsBlock = document.createElement('div');
                 commentActionsBlock.classList.add('comment_actions_block');
 
-                let replyButton = document.createElement('button');
-                replyButton.classList.add('action_button');
-                replyButton.innerHTML = "відповісти";
-                replyButton.onclick = function () { replyTo(comment["id"]) };
-                commentActionsBlock.appendChild(replyButton);
+                if (comment["is_deleted"] == 0) {
+                    let replyButton = document.createElement('button');
+                    replyButton.classList.add('action_button');
+                    replyButton.innerHTML = "відповісти";
+                    replyButton.onclick = function () { replyTo(comment["id"]) };
+                    commentActionsBlock.appendChild(replyButton);
 
-                let reportButton = document.createElement('button');
-                reportButton.classList.add('action_button');
-                reportButton.innerHTML = "поскаржитись";
-                reportButton.onclick = function () { reportOn(comment["id"], 'comment') };
-                commentActionsBlock.appendChild(reportButton);
+                    let reportButton = document.createElement('button');
+                    reportButton.classList.add('action_button');
+                    reportButton.innerHTML = "поскаржитись";
+                    reportButton.onclick = function () { reportOn(comment["id"], 'comment') };
+                    commentActionsBlock.appendChild(reportButton);
 
-                commentInfoBlock.appendChild(commentActionsBlock);
+                    commentInfoBlock.appendChild(commentActionsBlock);
+
+                }
                 commentBlock.appendChild(commentInfoBlock);
 
                 let imgsBlock = document.createElement('div');
@@ -232,7 +235,6 @@ function getDiscussion() {
 
 document.getElementById('reply_form').addEventListener('submit', function (event) {
     event.preventDefault();
-    //document.getElementById('reason').value = reasonEditor.getData();
     const form = event.target;
     const formData = new FormData(form);
 
