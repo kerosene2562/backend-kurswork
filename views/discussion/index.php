@@ -37,7 +37,7 @@
             <button id="modal_close_button" onclick="close_modal_window()">&times;</button>
         </div>
         <div id="img_vault_boys">
-            <img id="report_img" src="/lost_island/assets/images/report_boy.png" alt="be_nice">
+            <img id="report_img" src="/lost_island/assets/images/report_boy.gif" alt="report_boy">
         </div>
         <p id="reported_on"></p>
         <form id="report_form" action="report" method="POST" enctype="multipart/form-data">
@@ -48,15 +48,15 @@
         </form>
     </div>
 
-    <div id="modal_media" onclick="close_media()">
-        <div class="media_info">
+    <div id="modal_media">
+        <div class="media_info" id="media_top_info">
             <p id="top_info"></p>
         </div>
         <div id="img_container">
             <img id="media_img" class="media" src="" alt="зображення">
             <video id="media_video" class="media" controls width="300" autoplay></video>
         </div>
-        <div class="media_info">
+        <div class="media_info" onclick="close_media()">
             <p id="bottom_info"></p>
         </div>
     </div>
@@ -73,7 +73,7 @@
             <div class="titleDiscussion">
                 <div class="title">
                     <p class="title_text"><?= $threadTitle["title"] ?></p>
-                    <button class="action_button" onclick="reportOn(<?=$threadTitle['id']?>)">Поскаржитись</button>
+                    <button class="action_button_report" onclick="reportOn(<?=$threadTitle['id']?>)"><img class="action_img" src="/lost_island/assets/images/report.png" alt="report"></button>
                 </div>
                 <div class="content_title">
                     <div class="imgs_block">
@@ -100,10 +100,13 @@
                 </div>
             </div>
             <div id="comments"></div>
-            <button id onclick="replyTo('відповідь на тред')">Залишити коментар</button>
+            <div id="bottom_actions_block">
+                <button id="comment_thread_button" onclick="replyTo('відповідь на тред')">Залишити коментар</button>
+                <button id="updateDiscussionButton" onclick="getDiscussion()"><img id="updateDiscussionImg" class="action_img" src="/lost_island/assets/images/update.png" alt="update"></button>
+            </div>
         </div>
     </div>
-    <button id="updateDiscussionButton" onclick="getDiscussion()">Оновити</button>
+    
     <script src="/lost_island/scripts/discussion.js"></script>
     <script>
         window.addEventListener('load', () => {

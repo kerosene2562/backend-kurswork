@@ -1,4 +1,5 @@
 #threads_block {
+    min-height: 462px;
     max-width: 1500px;
     align-items: center;
     justify-content: center;
@@ -41,6 +42,12 @@
     max-height: 230px;
     object-fit: contain;
     border-radius: 10px;
+}
+
+.threads_not_found {
+    font-size: 30px;
+    color: rgb(214, 214, 214);
+
 }
 
 .text {
@@ -116,13 +123,21 @@
     outline: none;
 }
 
-.create_thread_button {
+#create_thread_button {
     margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
     width: 400px;
-    background-color: rgb(125, 177, 114);
     color: rgb(214, 214, 214);
+    background-color: rgb(125, 177, 114);
+    transition: all 0.5s;
 }
 
-.create_thread_button:hover {
+#create_thread_button:hover {
     background-color: rgb(0, 193, 0);
 }
+
+/* .led {
+    background-color: rgb(0, 193, 0);
+    box-shadow: rgb(0, 193, 0) 0px 0px 10000px 1px;
+} */

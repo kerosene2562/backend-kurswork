@@ -19,10 +19,10 @@
                 <option value="time">по часу</option>
                 <option value="bamp">по популярності</option>
             </select>
-            <a href="/lost_island/threads/add"><button class="create_thread_button">Створити тред</button></a>
+            <a href="/lost_island/threads/add"><button id="create_thread_button">Створити тред</button></a>
         </div>
     </div>
-    <div id="threads_block">
+    <div id="threads_block"></div>
     <script src="/lost_island/scripts/threads.js"></script>
 </body>
 </html>

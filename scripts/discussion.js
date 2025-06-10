@@ -79,7 +79,34 @@ function showMedia(media) {
 
 document.querySelector('body').addEventListener('click', function (media) {
     if (media.target.tagName === "IMG" || media.target.tagName === "VIDEO") {
-        showMedia(media.target);
+        if (!media.target.classList.contains('action_img'))
+            showMedia(media.target);
+    }
+})
+////////////////////////// move modal media window
+let keyPressed = false;
+let offsetX = 0;
+let offsetY = 0;
+let modalWindow = document.getElementById('modal_media');
+modalWindow.addEventListener('mousedown', (event) => {
+    let clientWindow = modalWindow.getBoundingClientRect();
+    modalWindow.style.top = `${clientWindow.top}px`;
+    modalWindow.style.left = `${clientWindow.left}px`;
+    modalWindow.style.position = 'fixed';
+    modalWindow.style.transform = 'none';
+    keyPressed = true;
+    offsetX = event.clientX - clientWindow.left;
+    offsetY = event.clientY - clientWindow.top;
+})
+
+modalWindow.addEventListener('mouseup', (event) => {
+    keyPressed = false;
+})
+
+document.body.addEventListener('mousemove', (event) => {
+    if (keyPressed) {
+        modalWindow.style.top = `${event.clientY - offsetY}px`;
+        modalWindow.style.left = `${event.clientX - offsetX}px`;
     }
 })
 
@@ -156,14 +183,26 @@ function getDiscussion() {
 
                 if (comment["is_deleted"] == 0) {
                     let replyButton = document.createElement('button');
-                    replyButton.classList.add('action_button');
-                    replyButton.innerHTML = "відповісти";
+                    replyButton.classList.add('action_button_reply');
+
+                    let replyImg = document.createElement('img');
+                    replyImg.src = "/lost_island/assets/images/reply.png";
+                    replyImg.classList.add('action_img');
+                    replyButton.appendChild(replyImg);
+
                     replyButton.onclick = function () { replyTo(comment["id"]) };
                     commentActionsBlock.appendChild(replyButton);
 
+
+
                     let reportButton = document.createElement('button');
-                    reportButton.classList.add('action_button');
-                    reportButton.innerHTML = "поскаржитись";
+                    reportButton.classList.add('action_button_report');
+
+                    let reportImg = document.createElement('img');
+                    reportImg.src = "/lost_island/assets/images/report.png";
+                    reportImg.classList.add('action_img');
+                    reportButton.appendChild(reportImg);
+
                     reportButton.onclick = function () { reportOn(comment["id"], 'comment') };
                     commentActionsBlock.appendChild(reportButton);
 

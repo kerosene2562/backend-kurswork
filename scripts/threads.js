@@ -1,3 +1,30 @@
+let threadNotFaundText = [
+    "Люди ще не дійшли до твоїх думок, вислови їх в своєму треді",
+    "Схоже, що потрібного тобі треду немає, не чекай інших, створи його сам",
+    "Ой-ой, ще немає потрібного треду? Саме час його створити!",
+    "Не варто чекати поки хтось створить тред, створи його сам!"
+]
+
+let move = false;
+let currentOpacity = 0;
+
+function changeText(text) {
+    if (move) {
+        currentOpacity += 0.01;
+        if (currentOpacity > 1)
+            move = false
+    }
+    else {
+        currentOpacity -= 0.01;
+        if (currentOpacity < 0) {
+            text.innerHTML = threadNotFaundText[Math.floor(Math.random() * threadNotFaundText.length)]
+            move = true
+        }
+
+    }
+    text.style.opacity = currentOpacity.toString();
+}
+
 function getThreads() {
     let category_id = document.getElementById('category_id').value;
     let input = document.getElementById('search').value;
@@ -7,6 +34,12 @@ function getThreads() {
     fetch(`/lost_island/threads/getThreads?category_id=${category_id}&search=${input}&sort_by=${sort_by}`)
         .then(response => response.json())
         .then(threads => {
+            if (threads.length == 0) {
+                let threads_not_found = document.createElement('p');
+                threads_not_found.classList.add('threads_not_found');
+                threads_block.appendChild(threads_not_found);
+                setInterval(changeText, 30, threads_not_found);
+            }
             threads.forEach(thread => {
                 let refToThread = document.createElement('a');
                 refToThread.classList.add('thread_card_ref');
