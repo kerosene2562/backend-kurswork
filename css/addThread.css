@@ -43,6 +43,7 @@
 
 #title {
     border-radius: 10px;
+    color: rgb(214, 214, 214);
     width: 100%;
     height: 100%;
     background-color: rgb(85, 85, 85);
@@ -56,10 +57,13 @@
 }
 
 #description {
+    color: rgb(214, 214, 214);
     border-radius: 10px;
     width: 100%;
-    height: 125px;
+    height: 300px;
+    margin-bottom: 15px;
     background-color: rgb(85, 85, 85);
+    text-align: left;
     transition: box-shadow 1s;
     resize: none;
 }
@@ -138,4 +142,31 @@
     align-items: center;
     justify-content: center;
     padding-top: 15px;
+}
+
+.text_buttons {
+    display: inline;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.text_button {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgb(95, 95, 95);
+}
+
+.spoiler {
+    color: black;
+    background-color: black;
+}
+
+.spoiler:hover {
+    color: rgb(214, 214, 214);
+    background-color: transparent;
 }

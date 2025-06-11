@@ -1,7 +1,7 @@
 function replyTo(id) {
     document.getElementById("modal_reply_window").style.display = 'block';
     document.getElementById("imgs").value = null;
-    document.getElementById("comment_textarea").value = "";
+    document.getElementById("comment_textarea").innerHTML = "";
     document.getElementById('modal_overlay').style.display = 'block';
     document.body.style.overflow = "hidden";
     if (!isNaN(id)) {
@@ -308,7 +308,43 @@ textareaReport.addEventListener('input', () => {
 });
 
 textareaComment.addEventListener('input', () => {
-    if (textareaComment.value.length > maxLength) {
-        textareaComment.value = textareaComment.value.slice(0, maxLength);
+    if (textareaComment.innerHTML.length > maxLength) {
+        textareaComment.innerHTML = textareaComment.innerHTML.slice(0, maxLength);
     }
 });
+
+
+document.getElementById('comment_textarea').addEventListener('input', () => {
+    document.getElementById('comment').value = document.getElementById('comment_textarea').innerHTML;
+})
+
+function format(command) {
+    document.execCommand(command);
+}
+
+function setTag(tag) {
+    let selection = window.getSelection();
+    let text = selection.getRangeAt(0);
+    if (text.toString().length > 0) {
+        let newTag = document.createElement(tag);
+        newTag.innerHTML = selection.toString();
+        if (tag == 'a') {
+            newTag.href = selection.toString();
+            newTag.target = "_blank";
+        }
+        text.deleteContents();
+        text.insertNode(newTag);
+    }
+}
+
+function setSpoiler() {
+    let selection = window.getSelection();
+    let text = selection.getRangeAt(0);
+    if (text.toString().length > 0) {
+        let newSpoiler = document.createElement('span');
+        newSpoiler.innerHTML = selection.toString();
+        newSpoiler.classList.add('spoiler');
+        text.deleteContents();
+        text.insertNode(newSpoiler);
+    }
+}

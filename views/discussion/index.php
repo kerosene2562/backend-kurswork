@@ -23,8 +23,18 @@
         <form id="reply_form" action="add" method="POST" enctype="multipart/form-data">
             <input name="thread_id" type="hidden" value="<?=$threadTitle["id"]?>">
             <p id="replyed_to"></p>
-            <textarea name="comment" id="comment_textarea" placeholder="Коментар може містити максимум 15000 символів..."></textarea>
-            <div id="imgs_block"></div>
+            <div class="text_buttons">
+                <button type="button" class="text_button" onclick="format('bold')"><b>B</b></button>
+                <button type="button" class="text_button" onclick="format('italic')"><i>I</i></button>
+                <button type="button" class="text_button" onclick="format('underline')"><u>U</u></button>
+                <button type="button" class="text_button" onclick="format('strikeThrough')"><s>S</s></button>
+                <button type="button" class="text_button" onclick="setTag('sub')">A<sub>a</sub></button>
+                <button type="button" class="text_button" onclick="setTag('sup')">A<sup>a</sup></button>
+                <button type="button" class="text_button" onclick="setTag('a')"><p style="color: orange; padding: 0; margin: 0;">ref</p></button>
+                <button type="button" class="text_button" onclick="setSpoiler()">Sp</button>
+            </div>
+            <div id="comment_textarea" contenteditable="true"></div>
+            <input type="hidden" name="comment" id="comment"></input>
             <div id="uploader">
                 <label for="imgs" id="imgs_loader">Завантажити файл</label>
                 <input type="file" id="imgs" name="imgs_refs[]" accept=".jpg,.mp4,.gif,.png,.webp" multiple hidden>

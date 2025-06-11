@@ -273,7 +273,8 @@ video {
 #comment_textarea {
     border-radius: 10px;
     width: 100%;
-    height: 100%;
+    height: 170px;
+    color: rgb(214, 214, 214);
     background-color: rgb(85, 85, 85);
     transition: box-shadow 1s;
     resize: none;
@@ -425,4 +426,38 @@ video {
     width: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.text_buttons {
+    display: inline;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+}
+
+.text_button {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgb(95, 95, 95);
+}
+
+.spoiler {
+    color: black;
+    background-color: black;
+}
+
+.spoiler a {
+    color: black;
+    background-color: black;
+}
+
+.spoiler:hover {
+    color: rgb(214, 214, 214);
+    background-color: transparent;
+}
+
+.spoiler a:hover {
+    color: orange;
+    background-color: transparent;
 }

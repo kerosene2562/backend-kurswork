@@ -18,7 +18,18 @@
                     </div>
                 <?php endif; ?>  
                 <textarea name="title" id="title" placeholder="Заголовок може містити не більше 255 знаків..."></textarea>
-                <textarea name="description" id="description" placeholder="Опис може містити не більше 15000 знаків..."></textarea>
+                <div class="text_buttons">
+                    <button type="button" class="text_button" onclick="format('bold')"><b>B</b></button>
+                    <button type="button" class="text_button" onclick="format('italic')"><i>I</i></button>
+                    <button type="button" class="text_button" onclick="format('underline')"><u>U</u></button>
+                    <button type="button" class="text_button" onclick="format('strikeThrough')"><s>S</s></button>
+                    <button type="button" class="text_button" onclick="setTag('sub')">A<sub>a</sub></button>
+                    <button type="button" class="text_button" onclick="setTag('sup')">A<sup>a</sup></button>
+                    <button type="button" class="text_button" onclick="setTag('a')"><p style="color: orange; padding: 0; margin: 0;">ref</p></button>
+                    <button type="button" class="text_button" onclick="setSpoiler()">Sp</button>
+                </div>
+                <div id="description" contenteditable="true"></div>
+                <input type="hidden" name="description" id="description_sender">
                 <label for="files_loader" id="files_label">Завантажити файли</label>
                 <input type="file" id="files_loader" name="imgs_refs[]" accept=".jpg,.mp4,.gif,.png,.webp" multiple>
                 <select type="text" id="category_id" name="category_id">

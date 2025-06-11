@@ -137,7 +137,22 @@
     background-color: rgb(0, 193, 0);
 }
 
-/* .led {
-    background-color: rgb(0, 193, 0);
-    box-shadow: rgb(0, 193, 0) 0px 0px 10000px 1px;
-} */
+.spoiler {
+    color: black;
+    background-color: black;
+}
+
+.spoiler a {
+    color: black;
+    background-color: black;
+}
+
+.spoiler:hover {
+    color: rgb(214, 214, 214);
+    background-color: transparent;
+}
+
+.spoiler a:hover {
+    color: orange;
+    background-color: transparent;
+}

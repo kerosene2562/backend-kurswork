@@ -36,8 +36,8 @@ title.addEventListener('input', () => {
 });
 
 desc.addEventListener('input', () => {
-    if (desc.value.length > descMaxLen) {
-        desc.value = desc.value.slice(0, descMaxLen);
+    if (desc.innerHTML.length > descMaxLen) {
+        desc.innerHTML = desc.innerHTML.slice(0, descMaxLen);
     }
 });
 
@@ -52,3 +52,38 @@ document.querySelector('form').addEventListener('submit', function (e) {
         alert('Максимум 4 файли!');
     }
 });
+
+document.getElementById('description').addEventListener('input', () => {
+    document.getElementById('description_sender').value = document.getElementById('description').innerHTML;
+})
+
+function format(command) {
+    document.execCommand(command);
+}
+
+function setTag(tag) {
+    let selection = window.getSelection();
+    let text = selection.getRangeAt(0);
+    if (text.toString().length > 0) {
+        let newTag = document.createElement(tag);
+        newTag.innerHTML = selection.toString();
+        if (tag == 'a') {
+            newTag.href = selection.toString();
+            newTag.target = "_blank";
+        }
+        text.deleteContents();
+        text.insertNode(newTag);
+    }
+}
+
+function setSpoiler() {
+    let selection = window.getSelection();
+    let text = selection.getRangeAt(0);
+    if (text.toString().length > 0) {
+        let newSpoiler = document.createElement('span');
+        newSpoiler.innerHTML = selection.toString();
+        newSpoiler.classList.add('spoiler');
+        text.deleteContents();
+        text.insertNode(newSpoiler);
+    }
+}
