@@ -157,6 +157,7 @@ video {
     height: 100%;
     z-index: 10;
     display: none;
+    background-color: transparent;
 }
 
 #modal_report_window {
@@ -187,6 +188,7 @@ video {
     display: none;
 }
 
+
 #reportedType {
     display: none;
 }
@@ -194,7 +196,7 @@ video {
 #reason {
     border-radius: 10px;
     width: 100%;
-    height: 335px;
+    height: 270px;
     background-color: rgb(85, 85, 85);
     resize: none;
     overflow: auto;
@@ -214,7 +216,7 @@ video {
     transform: translate(-50%, -50%);
     z-index: 1000;
     width: 600px;
-    height: 700px;
+    height: 750px;
     background-color: rgb(54, 54, 54);
     border-radius: 10px;
     border: 1px solid grey;
@@ -265,6 +267,7 @@ video {
 
 #replyed_to {
     color: rgb(214, 214, 214);
+    margin: 0;
 }
 
 #comment_textarea {
@@ -282,7 +285,8 @@ video {
 }
 
 #uploader {
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     width: 100%;
     text-align: center;
 }
@@ -311,7 +315,7 @@ video {
     border: none;
     border-radius: 5px;
     padding: 5px;
-    margin-top: 15px;
+    margin-top: 5px;
     color: rgb(214, 214, 214);
     background-color: rgb(85, 85, 85);
     transition: background-color, box-shadow 0.3s;
@@ -414,4 +418,11 @@ video {
 #updateDiscussionImg {
     width: 100%;
     height: 100%;
+}
+
+.recaptcha_block {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }

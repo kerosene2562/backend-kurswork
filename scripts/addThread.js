@@ -23,3 +23,32 @@ function showLoadedImgs() {
         document.getElementById("files_label").appendChild(mediaContainer);
     });
 }
+
+let titleMaxLen = 255;
+let descMaxLen = 15000;
+let title = document.getElementById('title');
+let desc = document.getElementById('description');
+
+title.addEventListener('input', () => {
+    if (title.value.length > titleMaxLen) {
+        title.value = title.value.slice(0, titleMaxLen);
+    }
+});
+
+desc.addEventListener('input', () => {
+    if (desc.value.length > descMaxLen) {
+        desc.value = desc.value.slice(0, descMaxLen);
+    }
+});
+
+document.querySelector('form').addEventListener('submit', function (e) {
+    let filesInput = document.getElementById('files_loader');
+    if (filesInput.files.length < 1) {
+        e.preventDefault();
+        alert('Будь ласка, завантажте принаймні один файл!');
+    }
+    if (filesInput.files.length > 4) {
+        e.preventDefault();
+        alert('Максимум 4 файли!');
+    }
+});

@@ -11,6 +11,63 @@
             $db = \core\Core::get()->db;
             $categories = $db->select("categories", "*");
             $this->template->setParam("categories", $categories);
+            if($this->isPost)
+            {
+                $recaptchaSecret = '6LcQGl0rAAAAAALMw9eIkW-aP2uXGPg6EQ72TKec';
+                $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+                if (!$recaptchaResponse) {
+                    $error_message = "Будь ласка, пройдіть перевірку reCAPTCHA.";
+                } else {
+                    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptchaSecret."&response=".$recaptchaResponse);
+                    $responseKeys = json_decode($response, true);
+
+                    if(intval($responseKeys["success"]) !== 1) {
+                        $this->addErrorMessage('Ви не пройшли капчу!');
+                        return $this->render();
+                    }
+                    else{
+                        $db = \core\Core::get()->db;
+                
+                        if(strlen($this->post->title) < 10)
+                        {
+                            $this->addErrorMessage('Довжина назви повинна становити більше 10 символів!');
+                            return $this->render();
+                        }
+                        if(strlen($this->post->title) > 255)
+                        {
+                            $this->addErrorMessage('Довжина назви повинна становити не більше 255 символів!');
+                            return $this->render();
+                        }
+                        if(strlen($this->post->description) > 15000)
+                        {
+                            $this->addErrorMessage('Довжина опису повинна становити не більше 15000 символів!');
+                            return $this->render();
+                        }
+                        if($this->post->category_id == "-")
+                        {
+                            $this->addErrorMessage('Оберіть категорію!');
+                            return $this->render();
+                        }
+                        
+                        $folder_uuid = uniqid();
+                        $thread = new \models\Threads();
+                        $thread->title = $this->post->title;
+                        $thread->description = $this->post->description;
+                        $thread->category_id = $this->post->category_id;
+                        $thread->created_at = (new \DateTime('now'))->format('Y-m-d H:i:s');
+                        $thread->pics_folder_uuid = $folder_uuid;
+                        mkdir("pics/{$folder_uuid}", 0777, true);
+                        $thread->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);  
+                        $thread->save();
+                        
+                        $db = \core\Core::get()->db;
+                        $createdThread = $db->select('threads', 'id', ["pics_folder_uuid" => $folder_uuid]);
+                        http_response_code(201);
+                        return $this->redirect("/lost_island/discussion/index?thread_id={$createdThread[0]['id']}");
+                    }
+                }
+            }
             return $this->render();
         }
 
@@ -93,30 +150,9 @@
             exit;
         }
 
-        public function actionCreateThread()
-        {
-            if($this->isPost)
-            {
-                $folder_uuid = uniqid();
-                $thread = new \models\Threads();
-                $thread->title = $this->post->title;
-                $thread->description = $this->post->description;
-                $thread->category_id = $this->post->category_id;
-                $thread->created_at = (new \DateTime('now'))->format('Y-m-d H:i:s');
-                $thread->pics_folder_uuid = $folder_uuid;
-                mkdir("pics/{$folder_uuid}", 0777, true);
-                $thread->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);  
-                $thread->save();
-                
-                $db = \core\Core::get()->db;
-                $createdThread = $db->select('threads', 'id', ["pics_folder_uuid" => $folder_uuid]);
-                http_response_code(201);
-                return $this->redirect("/lost_island/discussion/index?thread_id={$createdThread[0]['id']}");
-            }
-        }
-
         public function actionRules()
         {
+            $this->func();
             return $this->redirect("/lost_island/categories/rules");
         }
     } 

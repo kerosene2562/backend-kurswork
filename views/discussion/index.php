@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$Title?></title>
     <link rel="stylesheet" href="/lost_island/css/discussion.css">
+    <link rel="stylesheet" href="/lost_island/css/editor.css">
 </head>
 <body onload="getDiscussion()">
     <div id="modal_overlay" onclick="close_modal_window()"></div>
@@ -26,7 +27,10 @@
             <div id="imgs_block"></div>
             <div id="uploader">
                 <label for="imgs" id="imgs_loader">Завантажити файл</label>
-                <input type="file" id="imgs" name="imgs_refs[]" multiple hidden>
+                <input type="file" id="imgs" name="imgs_refs[]" accept=".jpg,.mp4,.gif,.png,.webp" multiple hidden>
+            </div>
+            <div class="recaptcha_block">
+                <div class="g-recaptcha" data-sitekey="6LcQGl0rAAAAAJz_-sPJfQpJpts7bQm_JHKR-bjE" data-theme="dark"></div>
             </div>
             <button type="submit" id="sub_button" onclick="close_modal_window()">Залишити коментар</button>
         </form>
@@ -44,6 +48,9 @@
             <input type="text" name="reportedOnId" id="reportedOnId">
             <input type="text" name="reportedType" id="reportedType" value="false">
             <textarea name="reason" id="reason" placeholder="Скарга може містити максимум 15000 символів..."></textarea>
+            <div class="recaptcha_block">
+                <div class="g-recaptcha" data-sitekey="6LcQGl0rAAAAAJz_-sPJfQpJpts7bQm_JHKR-bjE" data-theme="dark"></div>
+            </div>
             <button type="submit" id="sub_button" onclick="close_modal_window()">Надіслати репорт</button>
         </form>
     </div>
@@ -133,3 +140,4 @@
     </script>
 </body>
 </html>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>

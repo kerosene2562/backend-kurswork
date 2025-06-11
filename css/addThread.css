@@ -8,7 +8,7 @@
 
 .create_thread_block {
     width: 900px;
-    height: 800px;
+    height: max-content;
     background-color: rgb(54, 54, 54);
     border-radius: 10px;
     border: 1px solid grey;
@@ -130,4 +130,12 @@
     object-fit: contain;
     display: block;
     margin: 10px;
+}
+
+.recaptcha_block {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
 }

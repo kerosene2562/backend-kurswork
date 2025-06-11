@@ -63,28 +63,60 @@
 
         public function actionAdd()
         {
-            $id = $this->post->thread_id;
-            $db = \core\Core::get()->db;
-            $folder_uuid = $db->select("threads", "pics_folder_uuid", ["id" => $id])[0]["pics_folder_uuid"];
-            $comment = new \models\Discussion();
-            $comment->thread_id = $this->post->thread_id;
-            $comment->comment = $this->post->comment;
-            $comment->parent_comment_id = $this->post->parent_comment_id;
-            $comment->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);
-            $comment->save();
-            exit;
+            $recaptchaSecret = '6LcQGl0rAAAAAALMw9eIkW-aP2uXGPg6EQ72TKec';
+            $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+            if (!$recaptchaResponse) {
+                $error_message = "Будь ласка, пройдіть перевірку reCAPTCHA.";
+            } 
+            else {
+                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptchaSecret."&response=".$recaptchaResponse);
+                $responseKeys = json_decode($response, true);
+
+                if(intval($responseKeys["success"]) !== 1) {
+                    
+                }
+                else{
+                    $id = $this->post->thread_id;
+                    $db = \core\Core::get()->db;
+                    $folder_uuid = $db->select("threads", "pics_folder_uuid", ["id" => $id])[0]["pics_folder_uuid"];
+                    $comment = new \models\Discussion();
+                    $comment->thread_id = $this->post->thread_id;
+                    $comment->comment = $this->post->comment;
+                    $comment->parent_comment_id = $this->post->parent_comment_id;
+                    $comment->imgs_refs = $this->imgsUploader->getImgsJson($folder_uuid);
+                    $comment->save();
+                    exit;
+                }
+            }
         }
 
         public function actionReport()
         {
-            $id = $this->post->reportedOnId;
-            $isComment = $this->post->reportedType;
-            
-            $report = new \models\Reports();
-            $report->reason = $this->post->reason;
-            $report->reported_id = $id;
-            $report->type = $isComment;
-            $report->save();
+            $recaptchaSecret = '6LcQGl0rAAAAAALMw9eIkW-aP2uXGPg6EQ72TKec';
+            $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+            if (!$recaptchaResponse) {
+                $error_message = "Будь ласка, пройдіть перевірку reCAPTCHA.";
+            } 
+            else {
+                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptchaSecret."&response=".$recaptchaResponse);
+                $responseKeys = json_decode($response, true);
+
+                if(intval($responseKeys["success"]) !== 1) {
+                    
+                }
+                else{
+                    $id = $this->post->reportedOnId;
+                    $isComment = $this->post->reportedType;
+                    
+                    $report = new \models\Reports();
+                    $report->reason = $this->post->reason;
+                    $report->reported_id = $id;
+                    $report->type = $isComment;
+                    $report->save();
+                }
+            }
         }
     }
 ?>

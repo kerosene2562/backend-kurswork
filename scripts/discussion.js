@@ -296,3 +296,19 @@ document.getElementById('report_form').addEventListener('submit', function (even
 
     getDiscussion();
 });
+
+let maxLength = 15000;
+let textareaComment = document.getElementById('comment_textarea');
+let textareaReport = document.getElementById('reason');
+
+textareaReport.addEventListener('input', () => {
+    if (textareaReport.value.length > maxLength) {
+        textareaReport.value = textareaReport.value.slice(0, maxLength);
+    }
+});
+
+textareaComment.addEventListener('input', () => {
+    if (textareaComment.value.length > maxLength) {
+        textareaComment.value = textareaComment.value.slice(0, maxLength);
+    }
+});
