@@ -23,6 +23,9 @@
         </div>
     </div>
     <div id="threads_block"></div>
+    <div class="reload_block">
+        <button id="updateDiscussionButton" onclick="getThreads()"><img id="updateDiscussionImg" class="action_img" src="/lost_island/assets/images/update.png" alt="update"></button>
+    </div>
     <script src="/lost_island/scripts/threads.js"></script>
 </body>
 </html>

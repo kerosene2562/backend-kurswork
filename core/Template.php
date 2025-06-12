@@ -76,7 +76,7 @@
                 if(file_exists($this->templateFilePath))
                 {
                     ob_start();
-                    $this->controller = \core\Core::get()->controllerObject;
+                    $this->controller = $core->controllerObject;
                     extract($this->paramsArray);
                     include($this->templateFilePath);
                     $str = ob_get_contents();
